@@ -1,9 +1,52 @@
-.login-form .md-card {
-    padding: 0 !important;
+.login-container{
+  display: grid;
+  grid-template-areas:
+    ". header ."
+    ". login ."
+    ". footer .";
+}
+.login-container .header{
+  grid-area: header;
+  justify-self: center;
+}
+.login-container .login-form{
+  grid-area: login;
+  margin-top: 20px;
+  width: 60%;
+  justify-self: center;
+  border: 1px #444444 solid;
+  border-radius: 10px;
+  background-color: #333333;
+  opacity: 0.9;
+  padding: 20px;
+  padding-top: 30px;
 }
 
-.login-form .md-card-title {
-    background-color: blue;
+.login-container .login-form label{
+  font-size: 25px;
+  color: white !important;
+}
+
+.login-container .login-form input{
+    font-size: 20px;
+    color: white !important;
+}
+
+.login-container .login-form input::placeholder{
+  color: #999999;
+}
+
+.login-container .login-form button{
+  float: right;
+}
+
+.login-container .login-form button.md-button.md-raised:not([disabled]){
+  background-color: #FFFFFF !important;
+  color: black;
+}
+.login-container .login-form button.md-button.md-raised:disabled{
+  background-color: darkgray !important;
+  color: gray
 }
 
 md-toast {
