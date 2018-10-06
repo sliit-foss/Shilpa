@@ -19,6 +19,18 @@ gulp
 ```
 or on the IDE you are using, run the default task of the gulp file.
 
+### Docker
+
+#### Build an image: 
+```bash
+docker build . -t shilpa-services:$(git rev-parse --short HEAD) -t shilpa-services:latest
+```
+#### Run the services: 
+```bash
+docker-compose up
+```
+
+
 
 #### Implementation
 

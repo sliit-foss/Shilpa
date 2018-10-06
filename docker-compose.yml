@@ -1,0 +1,75 @@
+version: '3'
+
+services:
+  analytics_service:
+    image: shilpa-services:latest
+    working_dir: /app/services
+    command: ["node", "analytics_service/server.js"]
+    expose:
+      - "9011"
+    environment:
+      PORT: 9011
+  attendance-mgt-service:
+    image: shilpa-services:latest
+    working_dir: /app/services
+    command: ["node", "attendance-mgt-service/server.js"]
+    expose:
+      - "9009"
+    environment:
+      PORT: 9009
+  auth_service:
+    image: shilpa-services:latest
+    working_dir: /app/services
+    command: ["node", "auth_service/server.js"]
+    expose:
+      - "9001"
+    environment:
+      PORT: 9001
+  classroom_service:
+    image: shilpa-services:latest
+    working_dir: /app/services
+    command: ["node", "classroom_service/server.js"]
+    expose:
+      - "9003"
+    environment:
+      PORT: 9003
+  content-mgt-service:
+    image: shilpa-services:latest
+    working_dir: /app/services
+    command: ["node", "content-mgt-service/server.js"]
+    expose:
+      - "9004"
+    environment:
+      PORT: 9004
+  grade_service:
+    image: shilpa-services:latest
+    working_dir: /app/services
+    command: ["node", "grade_service/server.js"]
+    expose:
+      - "9008"
+    environment:
+      PORT: 9008
+  mail_service:
+    image: shilpa-services:latest
+    working_dir: /app/services
+    command: ["node", "mail_service/server.js"]
+    expose:
+      - "9006"
+    environment:
+      PORT: 9006
+  notification_service:
+    image: shilpa-services:latest
+    working_dir: /app/services
+    command: ["node", "notification_service/server.js"]
+    expose:
+      - "9015"
+    environment:
+      PORT: 9015
+  reminder_service:
+    image: shilpa-services:latest
+    working_dir: /app/services
+    command: ["node", "reminder_service/server.js"]
+    expose:
+      - "9016"
+    environment:
+      PORT: 9016
