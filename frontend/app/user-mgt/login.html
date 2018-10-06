@@ -1,0 +1,37 @@
+<div>
+
+    <md-content layout="row" layout-align="space-around" layout-padding="layout-padding" ng-cloak="ng-cloak" class="login-form" flex>
+        <md-card flex="flex" flex-gt-sm="50" flex-gt-md="33">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2><span>Login Form</span></h2>
+                </div>
+            </md-toolbar>
+            <md-card-content>
+                <form name="loginForm">
+                    <md-input-container class="md-block">
+                        <label>Login</label>
+                        <input type="text" name="username" ng-model="login.formData.username" placeholder="username" required=""/>
+                        <div ng-messages="" role="alert" multiple="">
+                            <div ng-message="required" class="my-message">Please enter your username.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Password</label>
+                        <input type="password" name="password" ng-model="login.formData.password" placeholder="password" required=""/>
+                        <div ng-messages="" role="alert" multiple="">
+                            <div ng-message="required" class="my-message">Please enter your password.</div>
+                        </div>
+                    </md-input-container>
+                    <md-button ng-disabled="!loginForm.$valid" ng-click="login.doLogin(login.formData)" class="md-raised md-primary">&nbsp Login &nbsp</md-button>
+                </form>
+            </md-card-content>
+        </md-card>
+    </md-content>
+
+    <!--Login toast area-->
+    <br/>
+    <br/>
+    <br/>
+    <div id="toastParent"></div>
+</div>

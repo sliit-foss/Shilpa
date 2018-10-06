@@ -1,0 +1,56 @@
+<md-dialog class="add-group-dialog" id="postNotices" name="postNotices">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Post A Notice</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="notice.cancel()">
+                <md-icon md-font-library="material-icons" aria-label="Close dialog">cancel</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <form name="noticeForm" id="noticeForm">
+                <div layout="column">
+
+                    <!--Subject-->
+                    <md-input-container>
+                        <label>Subject</label>
+                        <input type="text" name="noticeSubject" required ng-model="notice.initiatedNotice.subject">
+                        <div ng-messages="noticeForm.noticeSubject.$error">
+                            <div ng-message="required">Subject is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <!--Tags-->
+                    <md-chips ng-model="notice.selectedTags" md-autocomplete-snap
+                              md-transform-chip="notice.transformChip($chip)"
+                              md-require-match="notice.autocompleteDemoRequireMatch">
+                        <md-autocomplete
+                                md-selected-item="notice.selectedItem"
+                                md-search-text="notice.searchText"
+                                md-items="item in notice.querySearch(notice.searchText)"
+                                md-item-text="item.name"
+                                placeholder="Add tags">
+                            <span md-highlight-text="group.searchText">{{item.name}}</span>
+                        </md-autocomplete>
+                        <md-chip-template>
+                        <span>
+                          <strong>{{$chip.name}}</strong>
+                        </span>
+                        </md-chip-template>
+                    </md-chips>
+                    <br/>
+                    <!--Description-->
+                    <md-input-container>
+                        <label>Description</label>
+                        <input type="text" name="noticeDescription" ng-model="notice.initiatedNotice.description">
+                    </md-input-container>
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-raised md-primary" ng-click="notice.postTheNotice()">post</md-button>
+    </md-dialog-actions>
+</md-dialog>

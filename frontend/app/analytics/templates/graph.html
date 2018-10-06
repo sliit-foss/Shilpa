@@ -1,0 +1,20 @@
+<md-dialog class="edit-reminder-dialog" id="editGroup" name="editGroup">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{graphTopic}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="group.cancel()">
+                <md-icon md-font-library="material-icons" aria-label="Close dialog">cancel</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <canvas id="graph" width="600" height="600"></canvas>
+        </div>
+    </md-dialog-content>
+</md-dialog>
+
+
+

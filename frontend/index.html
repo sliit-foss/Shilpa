@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LMS-Cyborgs</title>
+
+    <!--jquery CDN-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <!--Main Angular Files-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
+    <script src="assets/js/angular-file-upload.min.js"></script>
+    <script src="assets/js/angular-local-storage.min.js"></script>
+
+    <!--JS-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/locales.min.js"></script>
+    <script src="assets/js/humanize-duration.js"></script>
+    <script type="text/javascript" src="assets/js/md-data-table.min.js"></script>
+    <script type="text/javascript" src="assets/js/mdPickers.min.js"></script>
+    <script type="text/javascript" src="assets/js/angular-timer.min.js"></script>
+    <script type="text/javascript" src="assets/js/ng-right-click.js"></script>
+
+    <!--CSS-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="assets/css/md-data-table.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/mdPickers.min.css">
+    <link rel="stylesheet" href="assets/css/ng-right-click.css">
+
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="styles/content-mgt-styles.css">
+    <link rel="stylesheet" href="styles/core-styles.css">
+    <link rel="stylesheet" href="styles/dashboard-styles.css">
+    <link rel="stylesheet" href="styles/user-mgt-styles.css">
+    <link rel="stylesheet" href="styles/classroom-mgt-styles.css">
+
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+    <!--Animate-->
+    <link rel="stylesheet" href="assets/css/animate.css">
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+
+    <!--Application Files-->
+    <script src="app/app.module.js"></script>
+    <script src="app/app.route.js"></script>
+
+    <!--Analytics-->
+    <script src="app/analytics/analytics.module.js"></script>
+    <script src="app/analytics/analytics.controller.js"></script>
+    <script src="app/analytics/analytics.route.js"></script>
+    <script src="app/analytics/analytics.helper.js"></script>
+    <script src="app/analytics/analytics.directive.js"></script>
+
+    <!--Attendance Management-->
+    <script src="app/attendance-mgt/attendance-mgt.module.js"></script>
+    <script src="app/attendance-mgt/attendance-mgt.controller.js"></script>
+    <script src="app/attendance-mgt/attendance-mgt.route.js"></script>
+    <script src="app/attendance-mgt/attendance-mgt.helper.js"></script>
+
+    <!--Core-->
+    <script src="app/core/core.module.js"></script>
+    <script src="app/core/core.directive.js"></script>
+    <script src="app/core/core.filter.js"></script>
+
+    <!--Dashboard-->
+    <script src="app/dashboard/dashboard.module.js"></script>
+    <script src="app/dashboard/dashboard.controller.js"></script>
+    <script src="app/dashboard/dashboard.route.js"></script>
+    <script src="app/dashboard/dashboard.helper.js"></script>
+
+    <!--Content Management-->
+    <script src="app/content-mgt/content-mgt.module.js"></script>
+    <script src="app/content-mgt/content-mgt.controller.js"></script>
+    <script src="app/content-mgt/content-mgt.route.js"></script>
+    <script src="app/content-mgt/content-mgt.helper.js"></script>
+    <script src="app/content-mgt/content-mgt.directive.js"></script>
+
+    <!--Classroom Management-->
+    <script src="app/classroom-mgt/classroom-mgt.module.js"></script>
+    <script src="app/classroom-mgt/classroom-mgt.controller.js"></script>
+    <script src="app/classroom-mgt/classroom-mgt.route.js"></script>
+    <script src="app/classroom-mgt/classroom-mgt.helper.js"></script>
+
+    <!--Grade Management-->
+    <script src="app/grade-mgt/grade-mgt.module.js"></script>
+    <script src="app/grade-mgt/grade-mgt.controller.js"></script>
+    <script src="app/grade-mgt/grade-mgt.route.js"></script>
+    <script src="app/grade-mgt/grade-mgt.helper.js"></script>
+
+    <!--Notification Management-->
+    <script src="app/notification-mgt/notification-mgt.module.js"></script>
+    <script src="app/notification-mgt/notification-mgt.controller.js"></script>
+    <script src="app/notification-mgt/notification-mgt.route.js"></script>
+    <script src="app/notification-mgt/notification-mgt.helper.js"></script>
+    <script src="app/notification-mgt/notification-mgt.directive.js"></script>
+
+    <!--Reminder Management-->
+    <script src="app/reminder-mgt/reminder-mgt.module.js"></script>
+    <script src="app/reminder-mgt/reminder-mgt.controller.js"></script>
+    <script src="app/reminder-mgt/reminder-mgt.route.js"></script>
+    <script src="app/reminder-mgt/reminder-mgt.helper.js"></script>
+
+    <!--User Management-->
+    <script src="app/user-mgt/user-mgt.module.js"></script>
+    <script src="app/user-mgt/user-mgt.controller.js"></script>
+    <script src="app/user-mgt/user-mgt.route.js"></script>
+    <script src="app/user-mgt/user-mgt.helper.js"></script>
+    <script src="app/user-mgt/user-mgt.directive.js"></script>
+
+    <!--chartJs-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+
+</head>
+<body>
+    <div ng-app="clms">
+        <div ui-view autoscroll="true"></div>
+    </div>
+</body>
+</html>

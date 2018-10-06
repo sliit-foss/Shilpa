@@ -1,0 +1,212 @@
+<div class="col-md-12">
+    <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+            <img src="../../../assets/images/icons/003-database.svg" style="width: 20px; margin-right: 15px;">
+            <h2>Personal Storage</h2>
+            <md-button ng-click="goBack()" ng-hide="fileManagerContext.currentFolder == 'personal-storage/'+loggedInUser+'/'">
+                <i class="fa fa-arrow-circle-o-left"></i>
+                Back
+            </md-button>
+            <span flex></span>
+
+            <div class="input-group" ng-if="viewMode == 'full'">
+                <input type="text" class="form-control"
+                       ng-model="searchKey" id="fileManagerSearch"
+                       placeholder="Search" aria-describedby="basic-addon2">
+                <span class="input-group-btn" style="width: 0;">
+                    <button class="btn btn-primary" ng-click="searchFiles()">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </span>
+                <span class="input-group-btn" style="width: 0;">
+                    <button class="btn btn-default" ng-click="loadFiles(); searchKey=''">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </span>
+            </div>
+
+            <md-button class="md-icon-button" ng-click="showNewDirectoryDialog()" ng-hide="isSelected">
+                <i class="fa fa-folder"></i>
+                <md-tooltip md-direction="bottom">Create Directory</md-tooltip>
+            </md-button>
+            <a ng-href="https://cyborgs-lms.s3.amazonaws.com/{{selectedFile.key}}" ng-if="isSelected && selectedFile.type=='file'">
+                <md-button class="md-icon-button">
+                    <i class="fa fa-download"></i>
+                    <md-tooltip md-direction="bottom">Download</md-tooltip>
+                </md-button>
+            </a>
+            <md-button class="md-icon-button" ng-click="renameFile()" ng-show="isSelected">
+                <i class="fa fa-edit"></i>
+                <md-tooltip md-direction="bottom">Rename</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="shareFile($event)" ng-show="isSelected">
+                <i class="fa fa-share-alt"></i>
+                <md-tooltip md-direction="bottom">Share</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="deleteFile($event)" ng-show="isSelected">
+                <i class="fa fa-trash"></i>
+                <md-tooltip md-direction="bottom">Delete</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="toggleUploadForm()" ng-hide="isSelected">
+                <i class="fa fa-upload"></i>
+                <md-tooltip md-direction="bottom">Upload</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="loadFiles()">
+                <i class="fa fa-refresh"></i>
+                <md-tooltip md-direction="bottom">Refresh</md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div class="file-manager-container">
+        <div class="lm-uploadform-container" ng-show="isEnabledUploadForm">
+            <div class="text-center">
+                <!--<input id="fileInput" onchange="angular.element(this).scope().addFileToList(this);"-->
+                <!--type="file" class="ng-hide" multiple>-->
+                <div ng-if="uploader">
+                    <input id="ps-FileInput" type="file" nv-file-select uploader="uploader"
+                           multiple  class="md-raised md-warn" style="display: none;"/>
+                </div>
+                <md-button id="ps-UploadButton" type="file" class="md-raised md-warn lm-upload-btn">
+                    <i class="fa fa-plus"></i>
+                    &nbsp;Add Files
+                </md-button>
+                <md-button type="file" class="md-raised md-primary lm-upload-btn"
+                           ng-click="uploader.uploadAll()"
+                           ng-disabled="uploader.queue.length == 0">
+                    <i class="fa fa-upload"></i>
+                    &nbsp;Upload Files
+                </md-button>
+            </div>
+            <md-list flex id="uploadList">
+                <md-list-item ng-repeat="item in uploader.queue">
+                    <div class="col-md-1">
+                        <i class="fa fa-file" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-list-item-text" layout="column" style="text-wrap: normal;">
+                            <h6>{{item.file.name}}</h6>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="md-list-item-text" layout="column">
+                            <h6>{{ item.file.size/1024/1024|number:2 }} MB</h6>
+                        </div>
+                    </div>
+                    <span flex></span>
+                    <div class="col-md-2">
+                        <md-progress-linear md-mode="determinate" value="{{item.progress}}"></md-progress-linear>
+                    </div>
+                    <md-button class="md-icon-button" ng-click="item.upload()">
+                        <i class="fa fa-upload"></i>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-click="item.remove()">
+                        <i class="fa fa-remove"></i>
+                    </md-button>
+                </md-list-item>
+            </md-list>
+        </div>
+        <!--<div class="col-md-2 hidden-sm hidden-xs">-->
+            <!--<div class="tree-view">-->
+                <!--dghsshg-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="col-md-12">
+            <div class="files-container" ng-hide="isLoading">
+                <div class="col-md-2 col-sm-2 col-xs-2 file text-center"
+                     ng-repeat="item in contents"
+                     ng-class="{'file-selected':item.selected}">
+                    <!--Menu-->
+                    <!--Files-->
+                    <md-menu ng-if="item.type == 'file'">
+                        <a ng-click="selectFile(item)"
+                           ng-dblclick="showFileDetailsDialog(item)">
+                            <i class="fa fa-file fa-2x"></i><br>
+                            {{item.key.replace(fileManagerContext.currentFolder,"")}}
+                        </a>
+                        <md-menu-content width="4">
+                            <md-menu-item>
+                                <md-button ng-click="ctrl.redial($event)">
+                                    <md-icon md-svg-icon="call:dialpad" md-menu-align-target></md-icon>
+                                    Redial
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
+                                    <md-icon md-svg-icon="call:voicemail"></md-icon>
+                                    Check voicemail
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-divider></md-menu-divider>
+                            <md-menu-item>
+                                <md-button ng-click="ctrl.toggleNotifications()">
+                                    <md-icon md-svg-icon="social:notifications-{{ctrl.notificationsEnabled ? 'off' : 'on'}}"></md-icon>
+                                    {{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+
+                    <!--Directories-->
+                    <md-menu ng-if="item.type == 'directory'">
+                        <a ng-click="selectFile(item)"
+                           ng-dblclick="goToDirectory(item.key)"
+                           ng-right-click="viewOptions($mdMenu, $event)">
+                            <i class="fa fa-folder fa-2x"></i><br>
+                            {{item.key.replace(fileManagerContext.currentFolder,"").replace("/","")}}
+                        </a>
+                        <md-menu-content width="4">
+                            <md-menu-item>
+                                <md-button ng-click="ctrl.redial($event)">
+                                    <md-icon md-svg-icon="call:dialpad" md-menu-align-target></md-icon>
+                                    Redial
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
+                                    <md-icon md-svg-icon="call:voicemail"></md-icon>
+                                    Check voicemail
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-divider></md-menu-divider>
+                            <md-menu-item>
+                                <md-button ng-click="ctrl.toggleNotifications()">
+                                    <md-icon md-svg-icon="social:notifications-{{ctrl.notificationsEnabled ? 'off' : 'on'}}"></md-icon>
+                                    {{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </div>
+            </div>
+            <clms-content-loading ng-show="isLoading"></clms-content-loading>
+        </div>
+        <!--<div class="file-manager-footer" ng-hide="isLoading">-->
+            <!--<div class="col-md-1">-->
+                <!--Usage:-->
+            <!--</div>-->
+            <!--<div class="col-md-1">-->
+                <!--<div class="progress">-->
+                    <!--<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"-->
+                         <!--aria-valuenow="{{used_percentage}}" aria-valuemin="0" aria-valuemax="100" style="width:50%">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4">{{(used_storage/1024)/1024 | number:1}} MB / {{(total_storage/1000)/1000}} MB</div>-->
+        <!--</div>-->
+        <md-toolbar class="md-primary">
+            <div class="md-toolbar-tools">
+                <div class="col-md-2">
+                    Usage:
+                </div>
+                <!--<div class="col-md-1">-->
+                    <!--<div class="progress">-->
+                        <!--<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"-->
+                        <!--aria-valuenow="{{used_percentage}}" aria-valuemin="0" aria-valuemax="100" style="width:50%">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="col-md-4">{{(used_storage/1024)/1024 | number:1}} MB / {{(total_storage/1024)/1024}} MB</div>
+            </div>
+        </md-toolbar>
+    </div>
+</div>

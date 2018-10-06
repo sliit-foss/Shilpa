@@ -1,0 +1,163 @@
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+
+            Lesson Plan
+            <!--Add Lessonplan-->
+            <md-tab label="Add Lesson Plan">
+                <md-content class="md-padding">
+                    <form name="lessonplanForm" id="lessonplanForm">
+                        <div style="padding-top: 30px; padding-left: 30px">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-md-4 col-sm-6 col-xs-12 well well-sm">
+                                    <div>
+                                    </div>
+                                    <h4>Add Lesson Plan</h4>
+                                    <div class="col-md-12" style="margin-bottom: 10px;">
+
+                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                            <label>Class</label>
+                                            <input name="class" ng-model="lessonplan.newLessonplan.class" required />
+
+                                            <div ng-messages="timetableForm.class.$error">
+                                                <div ng-message="required">Class is Required</div>
+                                            </div>
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" >
+                                            <div layout="row" layout-align="space-between center">
+                                                <label>Term</label>
+                                                <md-select ng-model="lessonplan.term" placeholder="Select a Term" class="md-underline" required>
+                                                    <md-option value="1">Term 1</md-option>
+                                                    <md-option value="2">Term 2</md-option>
+                                                    <md-option value="3">Term 3</md-option>
+                                                </md-select>
+                                            </div>
+                                        </md-input-container>
+
+                                        <div>
+                                            <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                                <label>Subject</label>
+                                                <input name="subject" ng-model="lessonplan.subject" required/>
+
+                                                <div ng-messages="lessonplanForm.subject.$error">
+                                                    <div ng-message="required">Subject is Required</div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+
+                                        <div>
+                                            <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                                <label>Unit</label>
+                                                <input name="unit" ng-model="lessonplan.unit" required />
+                                            </md-input-container>
+                                        </div>
+
+                                        <div class="col-md-12 text-right" style="padding-right: 0; margin-bottom: 30px;">
+                                            <md-button class="md-raised md-primary" ng-click="lessonplan.addLesson(lessonplan.term, lessonplan.subject, lessonplan.unit);">Add</md-button>
+                                        </div>
+                                        </md-input-container>
+                                        <div class="col-md-12 text-right" style="padding-right: 0; margin-bottom: 30px;">
+                                            <md-button class="md-raised md-primary" ng-click="lessonplan.addLessonplan()">Add Lessonplan</md-button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="col-md-4">
+                                        <h4>Term 1</h4>
+                                        <span ng-repeat="s in lessonplan.newLessonplan.term1" class="col-md-12">{{s.subject}}<br>{{s.unit}}</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h4>Term 2</h4>
+                                        <span ng-repeat="s in lessonplan.newLessonplan.term2" class="col-md-12">{{s.subject}}<br>{{s.unit}}</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h4>Term 3</h4>
+                                        <span ng-repeat="s in lessonplan.newLessonplan.term3" class="col-md-12">{{s.subject}}<br>{{s.unit}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+
+            <!--View Lessonplan-->
+            <md-tab label="View Lesson Plan">
+                <md-table-container>
+                    <table md-table ng-model="lessonplan.selected" ng-repeat="lesson in lessonplan.lessonplans">
+                        <thead md-head name="lessonplanTable" id="lessonplanTable">
+                        <tr md-row="">
+                            <td md-cell><h4>Class {{lesson.class}}</h4></td>
+                            <td md-cell>
+                                <md-button class="md-icon-button" ng-click="lessonplan.getLessonplan(lesson.class)">
+                                    <md-icon md-font-library="material-icons" alt="Update timetable">update</md-icon>
+                                </md-button></td>
+                        </tr>
+                        <tr md-row>
+                            <th md-column>Term-1</th>
+                            <th md-column>Term-2</th>
+                            <th md-column>Term-3</th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row md-select="lessonplan" md-select-id="Subject" md-auto-select ng-repeat="t in lesson.term1 | filter: filter.search | limitTo: lessonplan.query.limit : (lessonplan.query.page -1) * lessonplan.query.limit">
+                            <td md-cell>{{lesson.term1[$index].subject}} - {{lesson.term1[$index].unit}}</td>
+                            <td md-cell>{{lesson.term2[$index].subject}} - {{lesson.term2[$index].unit}}</td>
+                            <td md-cell>{{lesson.term3[$index].subject}} - {{lesson.term3[$index].unit}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+                <md-table-pagination md-limit="lessonplan.query.limit" md-limit-options="lessonplan.limitOptions" md-page="lessonplan.query.page" md-total="{{lessonplan.lessonplans.length}}" md-page-select="true"></md-table-pagination>
+            </md-tab>
+
+            <!--Update Lessonplan-->
+            <md-tab label="Update Lessonplan">
+                <md-content>
+                    <div class="col-md-12">
+                        <div class="col-md-12">{{updateLessonplan.class}}</div>
+                        <div class="col-md-2">
+                            <span class="col-md-12"><h4>Term 1</h4></span>
+                            <span class="col-md-12" ng-repeat="m in lessonplan.updateLessonplan.term1">
+                            <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                            <input type="text" ng-model="m.subject">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                            <input type="text" ng-model="m.unit">
+                            </md-input-container>
+                        </span>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="col-md-12"><h4>Term 2</h4></span>
+                            <span class="col-md-12" ng-repeat="m in lessonplan.updateLessonplan.term2">
+                            <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                            <input type="text" ng-model="m.subject">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                            <input type="text" ng-model="m.unit">
+                            </md-input-container>
+
+                        </span>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="col-md-12"><h4>Term 3</h4></span>
+                            <span class="col-md-12" ng-repeat="m in lessonplan.updateLessonplan.term3">
+                            <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                            <input type="text" ng-model="m.subject">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                            <input type="text" ng-model="m.unit">
+                            </md-input-container>
+                        </span>
+                        </div>
+
+                    </div>
+                    <md-button ng-click="lessonplan.updateLesson(lessonplan.updateLessonplan)" class="md-raised md-primary">Update</md-button>
+                </md-content>
+            </md-tab>
+
+        </md-tabs>
+    </md-content>
+</div>

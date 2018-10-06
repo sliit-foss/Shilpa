@@ -1,0 +1,30 @@
+.card-media {
+    background-color: #ffffff;
+    background-size: 100%;
+    /*background-image: url("../assets/images/user-group.png");*/
+}
+
+.user-mgt-card {
+    background-color: #ffffff;
+    background-image: url("../assets/images/network.png");
+}
+
+.timetable-mgt-card {
+    background-color: #ffffff;
+    background-image: url("../assets/images/timetable.png");
+}
+
+.lessonplan-mgt-card {
+    background-color: #ffffff;
+    background-image: url("../assets/images/lessonplan.png");
+}
+
+.message-card {
+    background-color: #ffffff;
+    background-image: url("../assets/images/chatting.png");
+}
+
+.classroom-card {
+    background-color: #ffffff;
+    background-image: url("../assets/images/teacher.png");
+}

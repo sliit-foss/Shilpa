@@ -1,0 +1,193 @@
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+
+            Add Timetable
+            <!--Add Timetable tab-->
+            <md-tab label="Add Time Table">
+                <md-content class="md-padding">
+                    <form name="timetableForm" id="timetableForm">
+                        <div style="padding-top: 30px; padding-left: 30px">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-md-4 col-sm-6 col-xs-12 well well-sm">
+                                    <div>
+                                    </div>
+                                    <h4>Add Timetable</h4>
+                                    <div class="col-md-12" style="margin-bottom: 10px;">
+
+                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                            <label>Class</label>
+                                            <input name="class" ng-model="timetable.newTimetable.class" required />
+
+                                            <div ng-messages="timetableForm.class.$error">
+                                                <div ng-message="required">Class is Required</div>
+                                            </div>
+                                        </md-input-container>
+
+                                       <!-- <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                            <label>Day</label>
+                                            <div class="ui-select col-lg-12">
+                                                <select class="form-control" ng-model="timetable.day.Active" >
+                                                    <option selected="true" disabled="disabled">Select Subject
+                                                    </option>
+                                                    <option value="1">Monday</option>
+                                                    <option value="2">Tuesday</option>
+                                                    <option value="3">Wednesday</option>
+                                                    <option value="4">Thursday</option>
+                                                    <option value="5">Friday</option>
+                                                </select>
+                                            </div>
+                                        </md-input-container>-->
+
+                                        <md-input-container class="md-block" >
+                                            <div layout="row" layout-align="space-between center">
+                                                <label>Day</label>
+                                                <md-select ng-model="timetable.day.Active" placeholder="Select a Day" class="md-underline" required>
+                                                    <md-option value="1">Monday</md-option>
+                                                    <md-option value="2">Tuesday</md-option>
+                                                    <md-option value="3">Wednesday</md-option>
+                                                    <md-option value="4">Thursday</md-option>
+                                                    <md-option value="5">Friday</md-option>
+                                                </md-select>
+                                            </div>
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                            <label>Subject</label>
+                                            <input name="subject" ng-model="timetable.subject" required />
+
+                                            <div ng-messages="timetableForm.subject.$error">
+                                                <div ng-message="required">Subject is Required</div>
+                                            </div>
+                                            <div class="col-md-12 text-right" style="padding-right: 0; margin-bottom: 30px;">
+                                                <md-button class="md-raised md-primary" ng-click="timetable.addSubject(timetable.day.Active, timetable.subject);">Add Subject</md-button>
+                                            </div>
+                                        </md-input-container>
+                                        <div class="col-md-12 text-right" style="padding-right: 0; margin-bottom: 30px;">
+                                            <md-button class="md-raised md-primary" ng-click="timetable.addTimetable()">Add Timetable</md-button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="col-md-2">
+                                        <h4>Monday</h4>
+                                        <span ng-repeat="s in timetable.newTimetable.monday" class="col-md-12">{{s.subject}}</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h4>Tuesday</h4>
+                                        <span ng-repeat="s in timetable.newTimetable.tuesday" class="col-md-12">{{s.subject}}</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h4>Wednesday</h4>
+                                        <span ng-repeat="s in timetable.newTimetable.wednesday" class="col-md-12">{{s.subject}}</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h4>Thursday</h4>
+                                        <span ng-repeat="s in timetable.newTimetable.thursday" class="col-md-12">{{s.subject}}</span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h4>Friday</h4>
+                                        <span ng-repeat="s in timetable.newTimetable.friday" class="col-md-12">{{s.subject}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+
+            <!--View Timetable tab-->
+            <md-tab label="View Time Table">
+                <md-table-container>
+                    <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                        <label>Search</label>
+                        <input type="text" placeholder="Search Subjects" ng-model="searchTimetable">
+                    </md-input-container>
+
+                    <table md-table ng-model="timetable.selected" ng-repeat="table in timetable.timetables">
+                        <div>
+                            <thead md-head name="timeTable" id="timeTable">
+                            <tr md-row="">
+                                <td md-cell><h4>Class {{table.class}}</h4></td>
+                                <td md-cell>
+                                    <md-button class="md-icon-button" ng-click="timetable.getTimetable(table.class)">
+                                        <md-icon md-font-library="material-icons" alt="Update timetable">update</md-icon>
+                                    </md-button></td>
+                            </tr>
+                            <tr md-row>
+                                <th md-column>Monday</th>
+                                <th md-column>Tuesday</th>
+                                <th md-column>Wednesday</th>
+                                <th md-column>Thursday</th>
+                                <th md-column>Friday</th>
+                            </tr>
+                            </thead>
+                            <tbody md-body>
+                            <tr md-row md-select="timetable" md-select-id="subject" md-auto-select ng-repeat="t in table.monday | filter: searchTimetable | limitTo: timetable.query.limit : (timetable.query.page -1) * timetable.query.limit">
+                                <td md-cell>{{table.monday[$index].subject}}</td>
+                                <td md-cell>{{table.tuesday[$index].subject}}</td>
+                                <td md-cell>{{table.wednesday[$index].subject}}</td>
+                                <td md-cell>{{table.thursday[$index].subject}}</td>
+                                <td md-cell>{{table.friday[$index].subject}}</td>
+                            </tr>
+                            </tbody>
+                        </div>
+                    </table>
+                </md-table-container>
+                <md-table-pagination md-limit="timetable.query.limit" md-limit-options="timetable.limitOptions" md-page="timetable.query.page" md-total="{{timetable.timetables.length}}" md-page-select="true"></md-table-pagination>
+            </md-tab>
+
+            <!--Update Timetable tab-->
+            <md-tab label="Update Time Table">
+                <md-content>
+                    <div class="col-md-12">
+                        <div class="col-md-12"><h2>{{updateTimetable.class}}</h2></div>
+                        <div class="col-md-2">
+                            <span class="col-md-12"><h4>Monday</h4></span>
+                            <span class="col-md-12" ng-repeat="m in timetable.updateTimetable.monday">
+                            <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                            <input type="text" ng-model="m.subject">
+                            </md-input-container>
+                        </span>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="col-md-12"><h4>Tuesday</h4></span>
+                            <span class="col-md-12" ng-repeat="m in timetable.updateTimetable.tuesday">
+                            <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                            <input type="text" ng-model="m.subject">
+                            </md-input-container>
+                        </span>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="col-md-12"><h4>Wednesday</h4></span>
+                            <span class="col-md-12" ng-repeat="m in timetable.updateTimetable.wednesday">
+                            <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                            <input type="text" ng-model="m.subject">
+                            </md-input-container>
+                        </span>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="col-md-12"><h4>Thursday</h4></span>
+                            <span class="col-md-12" ng-repeat="m in timetable.updateTimetable.thursday">
+                            <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                            <input type="text" ng-model="m.subject">
+                            </md-input-container>
+                        </span>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="col-md-12"><h4>Friday</h4></span>
+                            <span class="col-md-12" ng-repeat="m in timetable.updateTimetable.friday">
+                            <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                            <input type="text" ng-model="m.subject">
+                            </md-input-container>
+                        </span>
+                        </div>
+                    </div>
+                    <md-button ng-click="timetable.updateTable(timetable.updateTimetable)" class="md-raised md-primary">Update</md-button>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</div>
+

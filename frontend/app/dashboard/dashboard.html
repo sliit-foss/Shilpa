@@ -1,0 +1,122 @@
+<div class="clms-main-nav">
+    <div class="clms-logo">
+        <h4>Shilpa</h4>
+    </div>
+    <img src="../../assets/images/avatar.png" width="80px" style="padding: 10px; float: right;"
+         ng-click="dash.openUserSideBar()">
+</div>
+
+<div class="clms-main-content">
+    <div class="col-md-1 hidden-sm hidden-xs">
+        <div class="side-nav-fixed">
+            <!--<md-button class="md-raised md-primary" ng-click="dash.showNewClassroomPrompt()">-->
+                <!--<i class="fa fa-plus" aria-hidden="true" style="margin: 5px;"></i>-->
+                <!--<span style="margin-right: 5px;">Create Classroom</span>-->
+            <!--</md-button><br><br>-->
+            <!--<md-divider></md-divider>-->
+
+            <div class="side-nav-component text-center animated bounceInLeft">
+                <a ui-sref=".feed">
+                    <!--<i class="fa fa-home fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
+                    <img src="../../assets/images/icons/006-house.svg">
+                    <br>
+                    <span class="side-nav-content-title">Home</span>
+                </a>
+            </div>
+
+            <div class="side-nav-component text-center animated bounceInLeft" ng-show="dash.adminView">
+                <a ui-sref="dashboard.main-view.console">
+                    <!--<i class="fa fa-users fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
+                    <img src="../../assets/images/icons/005-team.svg">
+                    <br>
+                    <span class="side-nav-content-title">User Management</span>
+                </a>
+            </div>
+            <div class="side-nav-component text-center animated bounceInLeft">
+                <!--<i class="fa fa-university fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
+                <a ui-sref=".class">
+                <img src="../../assets/images/icons/004-desk.svg">
+                <br>
+                <span class="side-nav-content-title">Classrooms</span>
+                </a>
+            </div>
+            <div class="side-nav-component text-center animated bounceInLeft" ng-show="dash.teacherView">
+                <a ui-sref=".attendance">
+                    <!--<i class="fa fa-bell fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
+                    <img src="../../assets/images/icons/001-team.svg">
+                    <br>
+                    <span class="side-nav-content-title">Attendance</span>
+                </a>
+            </div>
+            <div class="side-nav-component text-center animated bounceInLeft">
+                <a ui-sref=".grade">
+                    <!--<i class="fa fa-bell fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
+                    <img src="../../assets/images/icons/002-grade.svg">
+                    <br>
+                    <span class="side-nav-content-title">Grades</span>
+                </a>
+            </div>
+            <div class="side-nav-component text-center animated bounceInLeft">
+                <a ui-sref=".notification">
+                    <!--<i class="fa fa-bell fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
+                    <img src="../../assets/images/icons/001-ring.svg">
+                    <br>
+                    <span class="side-nav-content-title">Notifications</span>
+                </a>
+            </div>
+            <div class="side-nav-component text-center animated bounceInLeft">
+                <!--<i class="fa fa-cloud fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
+                <a ui-sref=".storage">
+                    <img src="../../assets/images/icons/003-database.svg">
+                    <br>
+                    <span class="side-nav-content-title">Personal Storage</span>
+                </a>
+            </div>
+            <div class="side-nav-component text-center animated bounceInLeft">
+                <!--<i class="fa fa-bar-chart fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
+                <a ui-sref=".analytics">
+                <img src="../../assets/images/icons/002-analytics.svg">
+                <br>
+                <span class="side-nav-content-title">Analytics</span>
+                </a>
+            </div>
+            <div class="side-nav-component text-center animated bounceInLeft">
+                <!--<i class="fa fa-bar-chart fa-3x side-nav-content-icon" aria-hidden="true"></i>-->
+                <a ui-sref=".reminder">
+                <img src="../../assets/images/icons/check-mark.svg">
+                <br>
+                <span class="side-nav-content-title">Reminders</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-11">
+        <div style="margin-top: 40px;">
+            <div ui-view></div>
+        </div>
+    </div>
+</div>
+
+
+<div layout="row">
+    <md-sidenav md-component-id="right" class="md-sidenav-right" style="background-color: royalblue;">
+        <div class="text-center side-nav-content">
+            <img src="../../assets/images/avatar.png" width="90px" style="padding: 5px;"><br>
+            <h3>{{dash.name}}</h3>
+            <p><i>{{dash.permission}}</i></p>
+            <md-divider></md-divider>
+            <div class="logout-btn" style="margin-top: 20px;" ng-click="dash.logout()">
+                <md-button class="md-raised md-warn">Logout</md-button>
+            </div>
+            <div class="content-loading text-center">
+                <div class="loading-container">
+                    <md-progress-circular class="md-warn" md-mode="indeterminate" md-diameter="50" ng-show="dash.isLoading" ng-disabled="!dash.isLoading"></md-progress-circular>
+                </div>
+            </div>
+        </div>
+        <div class="footer-note text-center">
+            <h4>Shilpa</h4>
+            <small>Team Cyborgs &copy 2017</small>
+        </div>
+    </md-sidenav>
+</div>

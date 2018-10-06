@@ -1,0 +1,32 @@
+<div class="col-md-11" ng-cloak>
+    <md-content>
+        <md-card>
+            <md-tabs md-dynamic-height md-border-bottom>
+
+                <md-tab label="Inbox">
+                    <md-content>
+                        <div layout="row" layout-wrap="">
+                            <div flex>
+                                <md-list flex ng-cloak>
+                                    <md-list-item class="md-2-line" ng-repeat="mail in service.mails" ng-click="service.showViewMailDialog($event,$index)">
+                                        <img ng-src="../assets/images/email.png" class="md-avatar" style="background-color:#ff867c"/>
+                                        <div class="md-list-item-text" layout="column">
+                                            <h3 ng-if="mail.type == 'unread'"><strong>{{ mail.subject }}</strong></h3>
+                                            <h3 ng-if="mail.type == 'read'">{{ mail.subject }}</h3>
+                                            <h4>{{ mail.from }}</h4>
+                                        </div>
+                                    </md-list-item>
+                                </md-list>
+                            </div>
+                        </div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-card>
+    </md-content>
+</div>
+<div class="col-md-1" ng-cloak>
+    <md-button class="md-fab md-fab-bottom-right" aria-label="Profile" ng-click="service.showSendMailDialog($event)">
+        <md-icon md-svg-src="../assets/images/icons/send-mail.svg"></md-icon>
+    </md-button>
+</div>

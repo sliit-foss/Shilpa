@@ -1,0 +1,17 @@
+{
+  "name": "mail_service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ishan Yapa",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "hapi": "1.6.2",
+    "mongoose": "^4.12.5",
+    "sendgrid": "0.3.0-rc.1.8"
+  }
+}

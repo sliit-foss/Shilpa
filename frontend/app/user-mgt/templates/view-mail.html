@@ -1,0 +1,20 @@
+<md-dialog class="add-group-dialog" id="viewMail" name="viewMail">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{viewMail.newMail.subject}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="viewMail.cancel()">
+                <md-icon md-font-library="material-icons" aria-label="Close dialog">cancel</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div layout="column">
+                <h4><strong>From: </strong>{{ viewMail.newMail.from }}</h4>
+                <h4><strong>To: </strong>{{ viewMail.newMail.to }}</h4>
+                <h4><strong>Message: </strong>{{ viewMail.newMail.message }}</h4>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

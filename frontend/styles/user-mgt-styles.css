@@ -1,0 +1,141 @@
+.login-form .md-card {
+    padding: 0 !important;
+}
+
+.login-form .md-card-title {
+    background-color: blue;
+}
+
+md-toast {
+    left: calc(50vw - 150px);
+}
+
+md-toast.md-success-toast-theme .md-toast-content {
+    background-color: #388e3c;
+}
+
+md-toast.md-error-toast-theme .md-toast-content {
+    background-color: #d32f2f;
+}
+
+md-toolbar {
+    .md-button.md-default-theme {
+        border-radius: 99%;
+    }
+}
+
+.md-toolbar-tools-bottom {
+    font-size: small;
+& :last-child {
+      opacity: 0.8;
+  }
+}
+md-toolbar:not(.md-hue-1),
+.md-fab {
+    fill: #fff;
+}
+
+.card-media {
+    background-color: #ffffff;
+    background-size: 100%;
+    /*background-image: url("../assets/images/user-group.png");*/
+}
+
+.user-mgt-card {
+    background-color: #ffffff;
+    background-image: url("../assets/images/network.png");
+}
+
+.notice-mgt-card {
+    background-color: #ffffff;
+    background-image: url("../assets/images/protest.png");
+}
+
+.service-mgt-card {
+    background-color: #ffffff;
+    background-image: url("../assets/images/customer-service.png");
+}
+
+.activity-mgt-card {
+    background-color: #ffffff;
+    background-image: url("../assets/images/line-chart.png");
+}
+
+.storage-mgt-card {
+    background-color: #ffffff;
+    background-image: url("../assets/images/database.png");
+}
+
+
+
+.chipsdemoContactChips md-content.autocomplete {
+    min-height: 250px; }
+.chipsdemoContactChips md-content.autocomplete input {
+    min-width: 400px; }
+
+.chipsdemoContactChips .md-item-text.compact {
+    padding-top: 8px;
+    padding-bottom: 8px; }
+
+.chipsdemoContactChips .contact-item {
+    box-sizing: border-box; }
+.chipsdemoContactChips .contact-item.selected {
+    opacity: 0.5; }
+.chipsdemoContactChips .contact-item.selected h3 {
+    opacity: 0.5; }
+.chipsdemoContactChips .contact-item .md-list-item-text {
+    padding: 14px 0;
+    max-width: 190px; }
+.chipsdemoContactChips .contact-item .md-list-item-text h3 {
+    margin: 0 !important;
+    padding: 0;
+    line-height: 1.2em !important; }
+.chipsdemoContactChips .contact-item .md-list-item-text h3, .chipsdemoContactChips .contact-item .md-list-item-text p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; }
+@media (min-width: 960px) {
+    .chipsdemoContactChips .contact-item {
+        float: left;
+        width: 33%; } }
+
+.chipsdemoContactChips md-contact-chips {
+    margin-bottom: 10px; }
+
+.chipsdemoContactChips .md-chips {
+    padding: 5px 0 8px; }
+
+.chipsdemoContactChips .fixedRows {
+    height: 250px;
+    overflow: hidden; }
+
+
+.add-group-dialog {
+    width: 800px;
+}
+
+.selected-user-area{
+    background-color: #e0e0e0;
+}
+
+.selected-user-area-header {
+    margin-top: 10px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.md-button.md-fab.md-fab-bottom-right {
+    top: auto;
+    right: 20px;
+    bottom: 20px;
+    left: auto;
+    position: fixed;
+    background-color: #37474F;
+}
+
+.md-button.md-fab.md-fab-bottom-right:hover {
+    background-color: #263238;
+}
+
+.md-button.md-fab.md-fab-bottom-right:focus {
+    background-color: #37474F;
+}

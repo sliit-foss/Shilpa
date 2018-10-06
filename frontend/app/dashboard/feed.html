@@ -1,0 +1,40 @@
+<div class="col-md-6">
+    <lecture-material classroom="12-D" class="animated fadeIn"></lecture-material>
+</div>
+<div class="col-md-6">
+    <assignment-manager class="animated fadeIn"></assignment-manager>
+</div>
+
+
+<div class="col-md-12" ng-cloak>
+    <md-content class="animated fadeIn">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <img src="../../assets/images/icons/text-lines.svg" style="width: 20px; margin-right: 15px;">
+                <h2>News Feed</h2>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-card>
+            <md-content>
+                <div layout="row" layout-wrap="">
+                    <div flex>
+                        <md-list flex ng-cloak>
+                            <md-list-item class="md-2-line" ng-repeat="notice in feed.notices" ng-click="null">
+                                <img ng-src="../assets/images/exclamation.png" class="md-avatar" style="background-color:#ffffff"/>
+                                <div class="md-list-item-text" layout="column">
+                                    <h3><strong>{{ notice.subject }}</strong></h3>
+                                    <h4>{{ notice.description }}</h4>
+                                    <h4>{{ notice.pdate | date :  "dd-MM-y" }}</h4>
+                                </div>
+                                <md-chips ng-repeat="tag in notice.tags">
+                                    <md-chip style="background-color:#2196F3; color: #ffffff;">{{tag.tag}}</md-chip>
+                                </md-chips>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                </div>
+            </md-content>
+        </md-card>
+    </md-content>
+</div>

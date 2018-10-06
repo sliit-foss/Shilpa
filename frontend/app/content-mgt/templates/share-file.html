@@ -1,0 +1,36 @@
+<md-dialog class="add-group-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Share File</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="viewAssignment.closeDialog()">
+                <md-icon md-font-library="material-icons" aria-label="Close dialog">cancel</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <!--<clms-content-loading ng-show="viewAssignment.isLoading" style="margin-bottom: 40px;"></clms-content-loading>-->
+            <h5>{{fileShare.file.key.replace(fileShare.COMMON_PATH, "")}}</h5>
+
+            <md-content class="md-padding autocomplete" layout="column">
+                <md-contact-chips
+                        ng-model="fileShare.file.shared_with"
+                        md-contacts="fileShare.querySearch($query)"
+                        md-contact-name="name"
+                        md-contact-image="image"
+                        md-contact-email="email"
+                        md-require-match="true"
+                        md-highlight-flags="i"
+                        filter-selected="fileShare.filterSelected"
+                        placeholder="To">
+                </md-contact-chips>
+            </md-content>
+
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-raised" ng-click="fileShare.closeDialog()">Cancel</md-button>
+        <md-button class="md-raised md-primary"  ng-disabled="fileShare.file.shared_with.length == 0"  ng-click="fileShare.shareFile()">Share</md-button>
+    </md-dialog-actions>
+</md-dialog>

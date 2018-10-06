@@ -1,0 +1,247 @@
+<div class="col-md-12" ng-cloak>
+        <md-content>
+            <md-card>
+                <md-tabs md-dynamic-height md-border-bottom  md-selected="user.selectedIndex">
+
+                    <!--Beginning of Add Users Tab-->
+                    <md-tab label="Add Users">
+                        <md-card-content>
+                            <form name="userForm" id="userForm" novalidate>
+                                <div layout="column">
+                                    <!--Name field-->
+                                    <md-input-container>
+                                        <label>Name</label>
+                                        <input type="text" name="name" ng-model="user.userModel.name" required>
+                                        <div ng-messages="userForm.name.$error">
+                                            <div ng-message="required">Name is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                    <!--Username field-->
+                                    <md-input-container>
+                                        <label>Username</label>
+                                        <input type="text" name="username" ng-model="user.userModel.username" required>
+                                        <div ng-messages="userForm.username.$error">
+                                            <div ng-message="required">Username is required</div>
+                                        </div>
+                                    </md-input-container>
+                                    <!--Email field-->
+                                    <md-input-container>
+                                        <label>Email</label>
+                                        <input type="email" name="email" ng-model="user.userModel.email" required>
+                                        <div ng-messages="userForm.email.$error">
+                                            <div ng-message="userForm.email.$invalid">Enter a valid email.</div>
+                                        </div>
+                                    </md-input-container>
+                                    <!--Permission field-->
+                                    <md-input-container>
+                                        <label>Permission</label>
+                                        <md-select ng-model="user.userModel.permission" placeholder="Select One" class="md-no-underline" required md-no-asterisk="false" name="permission">
+                                            <md-option value="admin">Admin</md-option>
+                                            <md-option value="teacher">Teacher</md-option>
+                                            <md-option value="student">Student</md-option>
+                                            <md-option value="user">User</md-option>
+                                        </md-select>
+                                        <div ng-messages="userForm.permission.$error">
+                                            <div ng-message="required">Please select a permission</div>
+                                        </div>
+                                    </md-input-container>
+                                    <!--Show hide field-->
+                                    <div ng-show="user.isStudent('add',user.userModel.permission)">
+                                        <div layout="column">
+                                            <md-input-container>
+                                                <label>Student ID</label>
+                                                <input type="text" name="studentId" ng-model="user.userModel.studentId" ng-required="user.isFieldRequired">
+                                                <div ng-messages="userForm.studentId.$error">
+                                                    <div ng-message="required">Student ID is required.</div>
+                                                </div>
+                                            </md-input-container>
+                                            <md-input-container>
+                                                <label>Class</label>
+                                                <input type="text" name="class" ng-model="user.userModel.class" ng-required="user.isFieldRequired">
+                                                <div ng-messages="userForm.class.$error">
+                                                    <div ng-message="required">Class is required.</div>
+                                                </div>
+                                            </md-input-container>
+                                            <md-input-container>
+                                                <label>Level</label>
+                                                <md-select ng-model="user.userModel.level" placeholder="Select One" class="md-no-underline" md-no-asterisk="false" name="level" ng-required="user.isFieldRequired">
+                                                    <md-option value="G.C.E (A/L) Bio">G.C.E (A/L) Bio</md-option>
+                                                    <md-option value="G.C.E (A/L) Maths">G.C.E (A/L) Maths</md-option>
+                                                    <md-option value="G.C.E (A/L) Commerce">G.C.E (A/L) Commerce</md-option>
+                                                    <md-option value="G.C.E (A/L) Arts">G.C.E (A/L) Arts</md-option>
+                                                    <md-option value="G.C.E (O/L)">G.C.E (O/L)</md-option>
+                                                    <md-option value="Other">Other</md-option>
+                                                </md-select>
+                                                <div ng-messages="userForm.level.$error">
+                                                    <div ng-message="required">Level is required.</div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <!--Password field-->
+                                    <md-input-container>
+                                        <label>Password</label>
+                                        <input type="password" name="password" ng-model="user.userModel.password" required>
+                                        <div ng-messages="required">
+                                            <div ng-message="required">Password is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label>Confirm Password</label>
+                                        <input type="password" name="confirmPassword" ng-model="user.userModel.confirmPassword" required compare-with="user.userModel.password">
+                                        <div ng-messages="userForm.confirmPassword.$error">
+                                            <div ng-message="compareWith">Passwords do not match.</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </form>
+                            </md-card-content>
+                        <md-card-actions layout="row" layout-align="end center">
+                            <md-button ng-disabled="!userForm.$valid" ng-click="user.addNewUser(user.userModel)" class="md-raised md-primary">Submit</md-button>
+                        </md-card-actions>
+                    </md-tab>
+                    <!--End of Add Users Tab-->
+
+                    <!--Beginning of View Users Tab-->
+                    <md-tab label="View Users" id="viewUsers" name="viewUsers">
+
+                        <md-toolbar class="md-table-toolbar alternate" ng-show="true && user.selected.length">
+                            <div class="md-toolbar-tools">
+                                <span>{{user.selected.length}} {{user.selected.length > 1 ? 'items' : 'item'}} selected</span>
+                                <div flex></div>
+                                <md-button class="md-icon-button" ng-click="user.showCreateGroupDialog($event)">
+                                    <md-icon md-font-library="material-icons" alt="Create user group">group_add</md-icon>
+                                </md-button>
+                                <md-button class="md-icon-button" ng-click="user.navigateToTab(2)">
+                                    <md-icon md-font-library="material-icons" alt="Update user">update</md-icon>
+                                </md-button>
+                                <md-button class="md-icon-button" ng-click="user.showDeleteConfirm($event)">
+                                    <md-icon md-font-library="material-icons" alt="Delete user">delete</md-icon>
+                                </md-button>
+                            </div>
+                        </md-toolbar>
+
+                        <md-table-container>
+                            <table md-table md-row-select multiple ng-model="user.selected" name="userTable" id="userTable" md-on-select="user.setSelectedUsers()">
+                                <thead md-head md-order="user.query.order" md-on-reorder="" >
+                                <tr md-row>
+                                    <th md-column md-order-by="nameToLower"><span>Username</span></th>
+                                    <th md-column md-numeric>Name</th>
+                                    <th md-column md-numeric>Email</th>
+                                    <th md-column md-numeric>User Type</th>
+                                    <th md-column md-numeric>Student ID</th>
+                                    <th md-column md-numeric>Class</th>
+                                    <th md-column md-numeric>Level</th>
+                                </tr>
+                                </thead>
+                                <tbody md-body>
+                                <tr md-row md-select="user" md-select-id="name" md-auto-select ng-repeat="user in user.users | filter: filter.search | orderBy: user.query.order | limitTo: user.query.limit : (user.query.page -1) * user.query.limit" >
+                                    <td md-cell>{{user.username}}</td>
+                                    <td md-cell>{{user.name}}</td>
+                                    <td md-cell>{{user.email}}</td>
+                                    <td md-cell>{{user.permission}}</td>
+                                    <td md-cell>{{(user.studentId != "") ? user.studentId : "-"}}</td>
+                                    <td md-cell>{{(user.class != "") ? user.class : "-"}}</td>
+                                    <td md-cell>{{(user.level != "") ? user.level : "-"}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </md-table-container>
+                        <md-table-pagination md-limit="user.query.limit" md-limit-options="user.limitOptions" md-page="user.query.page" md-total="{{user.users.length}}" md-page-select="true"></md-table-pagination>
+                    </md-tab>
+                    <!--End of View Users Tab-->
+
+                    <!--Beginning of Update Users Tab-->
+                    <md-tab label="Update Users" ng-disabled="'user.enableUpdateTab'">
+
+                        <md-card-content>
+                            <form name="updateUserForm" id="updateUserForm" novalidate>
+                                <div layout="column">
+                                    <!--Username field-->
+                                    <md-input-container>
+                                        <label>Username</label>
+                                        <input type="text" name="updateUsername" ng-model="user.updateUserModel.username" required>
+                                        <div ng-messages="updateUserForm.updateUsername.$error">
+                                            <div ng-message="required">Username is required</div>
+                                        </div>
+                                    </md-input-container>
+                                    <!--Name field-->
+                                    <md-input-container>
+                                        <label>Name</label>
+                                        <input type="text" name="updateName" ng-model="user.updateUserModel.name" required>
+                                        <div ng-messages="updateUserForm.updateName.$error">
+                                            <div ng-message="required">Name is required.</div>
+                                        </div>
+                                    </md-input-container>
+                                    <!--Email field-->
+                                    <md-input-container>
+                                        <label>Email</label>
+                                        <input type="email" name="updateEmail" ng-model="user.updateUserModel.email" required>
+                                        <div ng-messages="updateUserForm.updateEmail.$error">
+                                            <div ng-message="userForm.email.$invalid">Enter a valid email.</div>
+                                        </div>
+                                    </md-input-container>
+                                    <!--Permission field-->
+                                    <md-input-container>
+                                        <label>Permission</label>
+                                        <md-select ng-model="user.updateUserModel.permission" placeholder="Select One" class="md-no-underline" required md-no-asterisk="false" name="updatePermission">
+                                            <md-option value="admin">Admin</md-option>
+                                            <md-option value="teacher">Teacher</md-option>
+                                            <md-option value="student">Student</md-option>
+                                            <md-option value="user">User</md-option>
+                                        </md-select>
+                                        <div ng-messages="updateUserForm.updatePermission.$error">
+                                            <div ng-message="required">Please select a permission</div>
+                                        </div>
+                                    </md-input-container>
+                                    <!--Show hide field-->
+                                    <div ng-show="user.isStudent('update', user.updateUserModel.permission)">
+                                        <div layout="column">
+                                            <md-input-container>
+                                                <label>Student ID</label>
+                                                <input type="text" name="updateStudentId" ng-model="user.updateUserModel.studentId" ng-required="user.isUpdateFieldRequired">
+                                                <div ng-messages="updateUserForm.updateStudentId.$error">
+                                                    <div ng-message="required">Student ID is required.</div>
+                                                </div>
+                                            </md-input-container>
+                                            <md-input-container>
+                                                <label>Class</label>
+                                                <input type="text" name="updateClass" ng-model="user.updateUserModel.class" ng-required="user.isUpdateFieldRequired">
+                                                <div ng-messages="updateUserForm.updateClass.$error">
+                                                    <div ng-message="required">Class is required.</div>
+                                                </div>
+                                            </md-input-container>
+                                            <md-input-container>
+                                                <label>Level</label>
+                                                <md-select ng-model="user.updateUserModel.level" placeholder="Select One" class="md-no-underline" md-no-asterisk="false" name="updateLevel" ng-required="user.isUpdateFieldRequired">
+                                                    <md-option value="G.C.E (A/L) Bio">G.C.E (A/L) Bio</md-option>
+                                                    <md-option value="G.C.E (A/L) Maths">G.C.E (A/L) Maths</md-option>
+                                                    <md-option value="G.C.E (A/L) Commerce">G.C.E (A/L) Commerce</md-option>
+                                                    <md-option value="G.C.E (A/L) Arts">G.C.E (A/L) Arts</md-option>
+                                                    <md-option value="G.C.E (O/L)">G.C.E (O/L)</md-option>
+                                                    <md-option value="Other">Other</md-option>
+                                                </md-select>
+                                                <div ng-messages="updateUserForm.updateLevel.$error">
+                                                    <div ng-message="required">Level is required.</div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </md-card-content>
+                        <md-card-actions layout="row" layout-align="end center">
+                            <md-button ng-disabled="!updateUserForm.$valid" ng-click="user.updateSelectedUser()" class="md-raised md-primary">Submit</md-button>
+                        </md-card-actions>
+                    </md-tab>
+                </md-tabs>
+            </md-card>
+        </md-content>
+</div>
+
+<!--custom style-->
+<style>
+    .label {
+        color: #515151
+    }
+</style>

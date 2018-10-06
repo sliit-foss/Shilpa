@@ -1,0 +1,18 @@
+{
+  "name": "classroom_service",
+  "version": "1.0.0",
+  "description": "This service is used for Clasroom Management",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha *.test.js",
+    "start": "node server.js"
+  },
+  "author": "yoosufaadil",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "mongoose": "^4.11.12"
+  }
+}

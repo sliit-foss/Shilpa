@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One');
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script');
+@import url('https://fonts.googleapis.com/css?family=Leckerli+One');
+@import url('https://fonts.googleapis.com/css?family=Crete+Round');
+
+
+.content-loading{
+    color: #6C7A89;
+    margin-top: 70px;
+}
+
+.content-loading .loading-container{
+    width:auto;
+    margin: auto;
+    postion: absolute;
+    height: auto;
+    text-align: center;
+}
+
+.content-loading .loading-container md-progress-circular{
+    margin: auto;
+}
+
+/*Home Page*/
+.home-background-container{
+    background-image: url('../assets/images/bk.jpg');
+    height: 100vh;
+    background-size: cover;
+    filter: brightness(0.2);
+    z-index: -1000000;
+
+}
+
+.home-container{
+    color: #f5f5f5;
+    z-index: 100;
+    position: absolute;
+    top: 30vh;
+    width: 100%;
+}
+
+.home-content h1{
+    /*font-family: 'Alfa Slab One', cursive;*/
+    font-family: 'Leckerli One', cursive;
+    font-size: 72px;
+    font-weight: 100;
+    /*letter-spacing: 10px;*/
+    color: #ff7e2d;
+}
+
+.home-content h4{
+    margin-top: 0;
+    letter-spacing: 5px;
+    color: #e3e3e3;
+    font-family: 'Crete Round', serif;
+}
+
+.home-content button{
+    padding: 10px 30px;
+    background-color: transparent;
+    margin-top: 15px;
+    border-radius: 20px;
+    border-color: #ff7e2d;
+    color: #e3e3e3;
+}
+
+.home-content button:hover{
+    border-color: rgba(255, 130, 47, 0.81);
+}
+
+.home-container .text-container{
+    margin: auto;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.home-footer{
+    color:silver;
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+}

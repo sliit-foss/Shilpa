@@ -1,0 +1,15 @@
+<div layout="column" ng-show="notification.isStudent">
+    <md-content style="height: 600px;" md-theme="altTheme">
+        <section>
+            <md-list layout-padding="">
+                <md-list-item class="md-3-line" ng-repeat="item in notification.notifications" ng-click="null">
+                    <div class="md-list-item-text">
+                        <h3><b>{{item.title}}</b></h3>
+                        <p>{{item.discription}}</p>
+                        <h4>{{item.publishedDateTime |ago}}</h4>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </section>
+    </md-content>
+</div>

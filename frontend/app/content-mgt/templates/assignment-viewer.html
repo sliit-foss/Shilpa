@@ -1,0 +1,45 @@
+<div class="col-md-12">
+    <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+            <img src="../../../assets/images/icons/homework.svg" style="width: 20px; margin-right: 15px;">
+            <h2>Assignments</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="openNewAssignmentDialog($event)" ng-if="user_role == 'teacher' || user_role == 'admin'">
+                <i class="fa fa-plus"></i>
+                <md-tooltip md-direction="bottom">New Assignment</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" ui-sref="dashboard.assignments">
+                <i class="fa fa-arrows-alt"></i>
+                <md-tooltip md-direction="bottom">Maximize</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="getAssignments()">
+                <i class="fa fa-refresh"></i>
+                <md-tooltip md-direction="bottom">Refresh</md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div class="lm-container">
+        <md-content md-theme="docs-dark" ng-hide="isLoading">
+            <md-list flex>
+                <md-list-item ng-repeat="item in availableAssignments | orderBy:'submissionDate'">
+                    <div class="col-md-1">
+                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    </div>
+                    <div class="md-list-item-text" layout="column">
+                        <h5><b>{{item.name}}</b></h5>
+                        <timer end-time="item.submissionDate"><small>Remaining</small> {{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
+                    </div>
+                    <span flex></span>
+                    <md-button class="md-primary" ng-click="openViewAssignmentDialog($event, item._id)">
+                        View
+                    </md-button>
+                    <md-button class="md-icon-button" ng-click="deleteAssignment($event,item._id)">
+                        <i class="fa fa-remove"></i>
+                    </md-button>
+                </md-list-item>
+            </md-list>
+        </md-content>
+        <clms-content-loading ng-show="isLoading"></clms-content-loading>
+        <clms-content-empty ng-show="availableAssignments.length == 0"></clms-content-empty>
+    </div>
+</div>

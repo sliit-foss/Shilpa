@@ -1,0 +1,74 @@
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+
+            Add Classroom
+            <md-tab label="Add Classroom">
+                <md-content class="md-padding">
+                    <form name="classroomForm" id="classroomForm">
+                        <div style="padding-top: 30px; padding-left: 30px">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-md-5 col-sm-6 col-xs-12 well well-sm">
+                                    <div>
+
+                                    </div>
+                                    <h4>Add Classroom</h4>
+                                    <div class="col-md-12" style="margin-bottom: 10px;">
+
+                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                            <label>Class</label>
+                                            <input name="class" ng-model="class.classroom.class" required />
+
+                                            <div ng-messages="classroomForm.class.$error">
+                                                <div ng-message="required">Class is Required</div>
+                                            </div>
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                            <label>Class Teacher</label>
+                                            <input name="classtr" ng-model="class.classroom.classtr" required />
+
+                                            <div ng-messages="classroomForm.classtr.$error">
+                                                <div ng-message="required">Teacher Name is Required</div>
+                                            </div>
+                                        </md-input-container>
+                                        <div class="col-md-6 col-md-offset-6 text-right" style="padding-right: 0; margin-bottom: 30px;">
+                                            <md-button class="md-raised md-primary" ng-click="class.addClassroom(class.classroom)">Add Class</md-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+
+            <!--View ClassRoom-->
+            <md-tab label="View Classroom">
+                <md-table-container>
+                    <table md-table ng-model="class.selected" name="classroomTable" id="classroomTable">
+                        <thead md-head md-order="class.query.order" md-on-reorder="" >
+                        <tr md-row>
+                            <th md-column><span>Class</span></th>
+                            <th md-column>Class Teacher</th>
+                            <th md-column></th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row md-select="classtr" md-select-id="classtr" md-auto-select ng-repeat="classr in class.classrooms | orderBy: class.query.order">
+                            <td md-cell>{{classr.class}}</td>
+                            <td md-cell>{{classr.classtr}}</td>
+                            <td md-cell><md-button class="md-icon-button" ng-click="class.showDeleteConfirmation(classr.class)">
+                                <md-icon md-font-library="material-icons" alt="Delete class">delete</md-icon>
+                            </md-button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+                <md-table-pagination md-limit="class.query.limit" md-limit-options="class.limitOptions" md-page="class.query.page" md-total="{{class.classrooms.length}}" md-page-select="true"></md-table-pagination>
+            </md-tab>
+
+        </md-tabs>
+    </md-content>
+</div>

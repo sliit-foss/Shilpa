@@ -1,0 +1,49 @@
+<md-dialog class="add-group-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Create New Assignment</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="newAssignment.closeDialog()">
+                <md-icon md-font-library="material-icons" aria-label="Close dialog">cancel</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <form name="assignmentForm" id="assignForm">
+                <div layout="column">
+                    <!--Assignment Name-->
+                    <md-input-container>
+                        <label>Assignment Name</label>
+                        <input type="text" name="name" ng-model="newAssignment.assignment.name" required>
+                        <div ng-messages="assignmentForm.name.$error">
+                            <div ng-message="required">Assignment name is required.</div>
+                        </div>
+                        <!--<div ng-messages="groupForm.groupName.$error">-->
+                        <!--<div ng-message="required">Assignment name is required.</div>-->
+                        <!--</div>-->
+                    </md-input-container>
+
+                    <!--Description-->
+                    <md-input-container>
+                        <label>Description</label>
+                        <input type="text" name="description" ng-model="newAssignment.assignment.description"
+                               md-maxlength="3000" rows="5" md-select-on-focus required>
+                    </md-input-container>
+
+                    <!--Date and Time-->
+
+                    <md-input-container>
+                        <label>Enter date</label>
+                        <md-datepicker name="date" ng-model="newAssignment.assignment.submissionDate"></md-datepicker>
+                    </md-input-container>
+
+                </div>
+
+            </form>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-raised md-primary" ng-click="newAssignment.createNewAssignment()">Create</md-button>
+    </md-dialog-actions>
+</md-dialog>

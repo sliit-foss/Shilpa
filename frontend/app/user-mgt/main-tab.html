@@ -1,0 +1,88 @@
+
+    <div class="col-md-12" id="consoleTabs" name="consoleTabs">
+        <div class="row">
+            <div class="col-md-4">
+                <md-card md-theme="dark-grey" md-theme-watch class="animated bounceIn">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">User Management</span>
+                            <span class="md-subhead">Everything related to user management</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-sm card-media user-mgt-card"></div>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button class="md-raised md-primary" ui-sref="dashboard.main-view.management">View</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div class="col-md-4">
+                <md-card md-theme="dark-grey" md-theme-watch class="animated bounceIn">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Post Notices</span>
+                            <span class="md-subhead">Post notices on wall by specifying the user group</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-sm card-media notice-mgt-card"></div>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button class="md-raised md-primary" ng-click="main.showPostNoticeDialog()">Post</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+            <div class="col-md-4">
+                <md-card md-theme="dark-grey" md-theme-watch class="animated bounceIn">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">User Services</span>
+                            <span class="md-subhead">View and respond to all queries posted by users</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-sm card-media service-mgt-card"></div>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button class="md-raised md-primary" ui-sref="dashboard.main-view.services">View</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <md-card md-theme="dark-grey" md-theme-watch class="animated bounceIn">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Activity Logs</span>
+                            <span class="md-subhead">View all the activity logs of logged in users</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-sm card-media activity-mgt-card"></div>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button class="md-raised md-primary" ui-sref="dashboard.main-view.logs">View</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+
+            <div class="col-md-4">
+                <md-card md-theme="dark-grey" md-theme-watch class="animated bounceIn">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Storage Management</span>
+                            <span class="md-subhead">Assign and update storage amounts of users</span>
+                        </md-card-title-text>
+                        <md-card-title-media>
+                            <div class="md-media-sm card-media storage-mgt-card"></div>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button class="md-raised md-primary" ui-sref="dashboard.main-view.storage">View</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,32 @@
+{
+  "name": "content-mgt-service",
+  "version": "1.0.0",
+  "description": "Backend service and API for content managment in the CLMS",
+  "main": "server.js",
+  "scripts": {
+    "test": "babel-node ./node_modules/.bin/mocha ./tests/*.test.js --timeout 15000 --compilers js:babel-core/register",
+    "start": "nodemon server.js",
+    "coverage": "nyc ./node_modules/.bin/mocha ./tests/*.test.js --timeout 15000 --compilers js:babel-core/register"
+  },
+  "author": "Nandun Bandara - Team Cyborgs",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.130.0",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "formidable": "^1.1.1",
+    "mongoose": "^4.11.12",
+    "nyc": "^11.2.1"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-istanbul": "^4.1.5",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.1"
+  }
+}

@@ -1,0 +1,1213 @@
+<script src="../../gulpfile.js"></script>
+
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+
+            <!-- Add Grades tab START-->
+            <md-tab md-on-select="grade.Clear()" label="Add Grades" ng-if="grade.teacherView">
+                <md-content class="md-padding">
+                    <div style="padding-top: 30px; padding-left: 30px">
+                        <div class="row">
+
+                            <!-- Left Tile with Student Details START -->
+                            <div class="col-md-5 col-sm-6 col-xs-12 well well-sm">
+                                <div></div>
+                                <h4>Student Details</h4>
+                                <div class="col-md-12" style="margin-bottom: 10px;">
+                                    <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                        <label>Student ID Number</label>
+                                        <input name="sid" ng-model="grade.studentGrades.sID">
+                                    </md-input-container>
+                                    <div class="col-md-6 col-md-offset-6 text-right"
+                                         style="padding-right: 0; margin-bottom: 30px;">
+                                        <md-button class="md-raised md-primary"
+                                                   ng-click="grade.getStudentsById(grade.studentGrades.sID)"
+                                                   style="margin: 0;">
+                                            <i class="fa fa-search"></i>
+                                            <span style="margin-right: 5px;">Get Details</span>
+                                        </md-button>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <fieldset disabled>
+                                        <div class="form-group ">
+                                            <input type="text" id="disabledTextInput01"
+                                                   ng-model="grade.studentGrades.name" class="form-control"
+                                                   placeholder="Student Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" id="disabledTextInput02"
+                                                   ng-model="grade.studentGrades.class" class="form-control"
+                                                   placeholder="Class Name">
+                                        </div>
+                                        <div class="form-group" ng-model="myVar">
+                                            <input type="text" id="disabledTextInput03"
+                                                   ng-model="grade.studentGrades.level" class="form-control"
+                                                   placeholder="Level Name">
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <!-- Left Tile with Student Details END -->
+                            <div>
+                                <div class="col-md-7 col-sm-6 col-xs-12 personal-info" style="padding-left: 50px;">
+                                    <div ng-hide="(grade.studentGrades.level=='G.C.E (A/L) Arts'|| grade.studentGrades.level=='G.C.E (O/L)' || grade.studentGrades.level=='G.C.E (A/L) Bio'||grade.studentGrades.level=='G.C.E (A/L) Maths'||grade.studentGrades.level=='G.C.E (A/L) Commerce'||grade.studentGrades.level=='Other')">
+                                        <md-card md-theme="dark-grey" md-theme-watch>
+                                            <md-card-title>
+                                                <md-card-title-text>
+                                                    <span class="md-headline">Grade Management | Add Grades</span>
+                                                    <span class="md-subhead"> To add marks, Please Enter a Student ID</span>
+                                                </md-card-title-text>
+                                                <md-card-title-media>
+                                                    <div class="md-media-sm card-media user-mgt-card"></div>
+                                                </md-card-title-media>
+                                            </md-card-title>
+                                        </md-card>
+                                    </div>
+                                    <!--Subject Input Form START-->
+                                    <form class="form-horizontal" role="form">
+                                        <div ng-show="(grade.studentGrades.level=='G.C.E (A/L) Arts'|| grade.studentGrades.level=='G.C.E (O/L)' || grade.studentGrades.level=='G.C.E (A/L) Bio'||grade.studentGrades.level=='G.C.E (A/L) Maths'||grade.studentGrades.level=='G.C.E (A/L) Commerce'||grade.studentGrades.level=='Other')">
+                                            <h4>Subjects and Marks</h4>
+                                            <md-radio-group ng-model="grade.studentGrades.cTerm">
+                                                <md-radio-button value="1" class="md-primary add-grade-btn"
+                                                                 style="display: inline-block; margin-right: 25px;">Term
+                                                    01
+                                                </md-radio-button>
+                                                <md-radio-button value="2" class="md-primary add-grade-btn"
+                                                                 style="display: inline-block; margin-right: 25px;">
+                                                    Term 02
+                                                </md-radio-button>
+                                                <md-radio-button value="3" class="md-primary add-grade-btn"
+                                                                 style="display: inline-block">Term 03
+                                                </md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label"></label>
+                                            <div class="col-lg-8">
+                                                <label class="col-lg-3 control-label"></label>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <!--OTHER Subject Input Form START-->
+                                            <div ng-show="grade.studentGrades.level=='Other'">
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Science:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.science" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Maths:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.maths" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">History:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.history" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Religon:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.religon" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Main Language (1st):</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.mainlanguage"
+                                                               value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">English:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.english" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Tamil:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.tamil" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Computer:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.computer" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Esthetics:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.esthetics" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--Other Subject Input Form END-->
+
+                                            <!--A/L Maths Subject Input Form START-->
+                                            <div ng-show="grade.studentGrades.level=='G.C.E (A/L) Maths'">
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">C.Maths:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.cmaths" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Physics:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.physics" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Chemistry:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.chemistry" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Gen. Knowledge:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.genaralknowledge"
+                                                               value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Genaral English:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.genaralenglish"
+                                                               value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--A/L Maths Subject Input Form END-->
+
+                                            <!--A/L Com Subject Input Form START-->
+                                            <div ng-show="grade.studentGrades.level=='G.C.E (A/L) Commerce'">
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Business std.:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.businessstudies"
+                                                               value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Accounting :</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.accounting"
+                                                               value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Economics :</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.economics" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Gen. Knowledge:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.genralknowlegde"
+                                                               value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Genaral English:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.genralenglish"
+                                                               value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--A/L Com Subject Input Form END-->
+
+                                            <!--A/L Bio Subject Input Form START-->
+                                            <div ng-show="grade.studentGrades.level=='G.C.E (A/L) Bio'">
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Bio :</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.bio" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Physics :</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.physics" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Chemistry :</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.chemistry" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Gen. Knowledge:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.genralknowledge"
+                                                               value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Genaral English:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.genralenglish"
+                                                               value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--A/L Bio Subject Input Form END-->
+
+                                            <!--A/L Art Subject Input Form START-->
+                                            <div ng-show="grade.studentGrades.level=='G.C.E (A/L) Arts'">
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Language & Lit. :</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.languagelit"
+                                                               value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Rel. & Histroy :</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.relhistroy"
+                                                               value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Economics :</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.economics" value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Gen. Knowledge:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.genralenglish"
+                                                               value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Genaral English:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.genralenglish"
+                                                               value=""
+                                                               type="number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--A/L Art Subject Input Form END-->
+
+                                            <!--O/L Subject Input Form START-->
+                                            <div ng-show="grade.studentGrades.level=='G.C.E (O/L)'">
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Science:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.science" value=""
+                                                               type="number" name="ol">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Maths:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.maths" value=""
+                                                               type="number" name="ol">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">History:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.histroy" value=""
+                                                               type="number" name="ol">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Religon:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.religon" value=""
+                                                               type="number" name="ol">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Lang. & Lit (1st):</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.mainlanguage"
+                                                               value=""
+                                                               type="number" name="ol">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">English:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.english" value=""
+                                                               type="number" name="ol">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Elective 01:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.elective1" value=""
+                                                               type="number" name="ol">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Elective 02:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.elective2" value=""
+                                                               type="number" name="ol">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-5 control-label">Elective 03:</label>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control"
+                                                               ng-model="grade.studentGrades.sGrades.elective3" value=""
+                                                               type="number" name="ol">
+                                                    </div>
+                                                </div>
+                                                <!--O/L Subject Input Form END-->
+
+                                                <!--Subject Input Form END-->
+                                            </div>
+
+                                            <div ng-show="(grade.studentGrades.level=='G.C.E (A/L) Arts'|| grade.studentGrades.level=='G.C.E (O/L)' || grade.studentGrades.level=='G.C.E (A/L) Bio'||grade.studentGrades.level=='G.C.E (A/L) Maths'||grade.studentGrades.level=='G.C.E (A/L) Commerce'||grade.studentGrades.level=='Other')">
+
+                                                <!-- Average calculation START-->
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label"></label>
+                                                    <div class="col-lg-8" align="right">
+                                                        <md-button class="md-raised md-primary"
+                                                                   ng-click="grade.calAvg()">
+                                                            <i class="fa fa-refresh"></i>&nbsp;
+                                                            <span style="margin-right: 5px;">Calculate Average</span>
+                                                        </md-button>
+                                                        <h3 style="display: inline-block">Average : </h3>
+                                                        <label style="font-size: 24px">{{
+                                                            grade.studentGrades.avg}}</label>
+                                                        <label class="col-lg-3 control-label"></label>
+                                                    </div>
+                                                </div>
+                                                <!-- Average calculation END-->
+
+
+                                                <!-- Add Remarks Tags START-->
+                                                <div class="form-group">
+                                                    <div>
+                                                        <label>Tag subjects needs remarks</label>
+                                                        <md-chips ng-model="grade.remarksTags" readonly="grade.readonly"
+                                                                  md-removable="grade.removable"></md-chips>
+                                                    </div>
+                                                    <div class="col-md-12" style="padding-top: 30px;">
+                                                        <textarea class="form-control"
+                                                                  placeholder="Add your remarks here"
+                                                                  ng-model="grade.studentGrades.remarksnote"></textarea>
+                                                    </div>
+                                                </div>
+                                                <!-- Add Remarks Tags END-->
+
+
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label"></label>
+                                                    <div class="col-md-8">
+                                                        <!--<input class="btn btn-primary" value="Save Changes" type="button">-->
+                                                        <md-button class="md-raised md-primary"
+                                                                   ng-click="grade.saveGrades()">
+                                                            <i class="fa fa-save"></i>&nbsp;
+                                                            <span style="margin-right: 5px;">Save</span>
+                                                        </md-button>
+
+                                                        <md-button class="md-raised md-warn" ng-click="grade.Clear()">
+                                                            <i class="fa fa-eraser"></i>&nbsp;
+                                                            <span style="margin-right: 5px;">Clear</span>
+                                                        </md-button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!--Subject Input Form End-->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </md-content>
+            </md-tab>
+            <!-- Add Grades tab END-->
+
+            <!-- Update Grades tab START-->
+            <md-tab md-on-select="grade.Clear()" label="Update Grades" ng-if="grade.teacherView">
+                <md-content>
+                    <div style="padding-top: 30px; padding-left: 30px">
+                        <!-- left column -->
+                        <div class="col-md-5 col-sm-6 col-xs-12 well well-sm">
+                            <div></div>
+                            <h4>Student Details</h4>
+                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                    <label>Student ID Number</label>
+                                    <input name="sid" ng-model="grade.studentGrades.sID">
+
+                                    <div ng-messages="userForm.social.$error" ng-if="!showHints"></div>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                    <label>Student's Class</label>
+                                    <md-select name="type" ng-model="grade.studentGrades.sClass" required>
+                                        <md-option value="10A">10A</md-option>
+                                        <md-option value="10B">10B</md-option>
+                                        <md-option value="10C">10C</md-option>
+                                        <md-option value="11A">11A</md-option>
+                                        <md-option value="11B">11B</md-option>
+                                        <md-option value="11C">11C</md-option>
+                                        <md-option value="12A">12 Arts</md-option>
+                                        <md-option value="12B">12 Bio</md-option>
+                                        <md-option value="12C">12 Commerce</md-option>
+                                        <md-option value="12M">12 Maths</md-option>
+                                        <md-option value="13A">13 Arts</md-option>
+                                        <md-option value="13B">13 Bio</md-option>
+                                        <md-option value="13C">13 Commerce</md-option>
+                                        <md-option value="13M">13 Maths</md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-12">
+                                <md-radio-group ng-model="grade.studentGrades.cTerm">
+                                    <md-radio-button value="1" class="md-primary add-grade-btn"
+                                                     style="display: inline-block; margin-right: 25px;">Term 01
+                                    </md-radio-button>
+                                    <md-radio-button value="2" class="md-primary add-grade-btn"
+                                                     style="display: inline-block; margin-right: 25px;"> Term 02
+                                    </md-radio-button>
+                                    <md-radio-button value="3" class="md-primary add-grade-btn"
+                                                     style="display: inline-block">Term 03
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </div>
+
+                            <div class="col-md-5 col-md-offset-6 text-right"
+                                 style="padding-right: 0; margin-bottom: 30px; padding-top: 20px;">
+                                <md-button class="md-raised md-primary" style="margin: 0;"
+                                           ng-click="grade.getGradeDetailsByFilter()">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                    <span style="margin-right: 5px;">Get Details</span>
+                                </md-button>
+                            </div>
+                            <div class="col-md-12">
+                                <fieldset disabled>
+                                    <div class="form-group ">
+                                        <input type="text" id="studentname"
+                                               ng-model="grade.studentGrades.sName" class="form-control"
+                                               placeholder="Student Name">
+                                    </div>
+
+                                    <div class="form-group" ng-model="myVar">
+                                        <input type="text" id="studentlevel"
+                                               ng-model="grade.studentGrades.sLevel" class="form-control"
+                                               placeholder="Level Name">
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12 personal-info" style="padding-left: 30px;">
+                        <div ng-hide="(grade.studentGrades.sLevel=='G.C.E (A/L) Arts'|| grade.studentGrades.sLevel=='G.C.E (O/L)' || grade.studentGrades.sLevel=='G.C.E (A/L) Bio'||grade.studentGrades.sLevel=='G.C.E (A/L) Maths'||grade.studentGrades.sLevel=='G.C.E (A/L) Commerce'||grade.studentGrades.sLevel=='Other')">
+                            <md-card md-theme="dark-grey" md-theme-watch>
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-headline">Grade Management | Update Grades </span>
+                                        <span class="md-subhead"> To update marks, Please Fill the details</span>
+                                    </md-card-title-text>
+                                    <md-card-title-media>
+                                        <div class="md-media-sm card-media user-mgt-card"></div>
+                                    </md-card-title-media>
+                                </md-card-title>
+                            </md-card>
+                        </div>
+
+
+                        <form class="form-horizontal" role="form" style="padding-left: 30px;"
+                              ng-show="(grade.studentGrades.sLevel=='G.C.E (A/L) Arts'|| grade.studentGrades.sLevel=='G.C.E (O/L)' || grade.studentGrades.sLevel=='G.C.E (A/L) Bio'||grade.studentGrades.sLevel=='G.C.E (A/L) Maths'||grade.studentGrades.sLevel=='G.C.E (A/L) Commerce'||grade.studentGrades.sLevel=='Other')">
+                            <div>
+                                <h4>Subjects and Marks</h4>
+                                <md-radio-group ng-model="grade.studentGrades.cTerm">
+                                    <md-radio-button value="1" class="md-primary add-grade-btn"
+                                                     style="display: inline-block; margin-right: 25px;">Term 01
+                                    </md-radio-button>
+                                    <md-radio-button value="2" class="md-primary add-grade-btn"
+                                                     style="display: inline-block; margin-right: 25px;">Term 02
+                                    </md-radio-button>
+                                    <md-radio-button value="3" class="md-primary add-grade-btn"
+                                                     style="display: inline-block">Term 03
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label"></label>
+                                <div class="col-lg-8">
+                                    <label class="col-lg-3 control-label"></label>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <!--OTHER Subject Input Form START-->
+                                    <div ng-show="grade.studentGrades.sLevel=='Other'">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Science:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].science" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Maths:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].maths" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">History:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].history" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Religon:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].religon" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Main Language (1st):</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].mainlanguage"
+                                                       value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">English:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].english" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Tamil:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].tamil" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Computer:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].computer" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Esthetics:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].esthetics" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Other Subject Input Form END-->
+
+                                    <!--A/L Maths Subject Input Form START-->
+                                    <div ng-show="grade.studentGrades.sLevel=='G.C.E (A/L) Maths'">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">C.Maths:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].cmaths" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Physics:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].physics" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Chemistry:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].chemistry" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Gen. Knowledge:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].genaralknowledge"
+                                                       value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Genaral English:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].genaralenglish"
+                                                       value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--A/L Maths Subject Input Form END-->
+
+                                    <!--A/L Com Subject Input Form START-->
+                                    <div ng-show="grade.studentGrades.sLevel=='G.C.E (A/L) Commerce'">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Business std.:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].businessstudies"
+                                                       value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Accounting :</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].accounting"
+                                                       value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Economics :</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].economics" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Gen. Knowledge:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].genralknowlegde"
+                                                       value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Genaral English:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].genralenglish"
+                                                       value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--A/L Com Subject Input Form END-->
+
+                                    <!--A/L Bio Subject Input Form START-->
+                                    <div ng-show="grade.studentGrades.sLevel=='G.C.E (A/L) Bio'">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Bio :</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].bio" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Physics :</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].physics" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Chemistry :</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].chemistry" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Gen. Knowledge:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].genralknowledge"
+                                                       value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Genaral English:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].genralenglish"
+                                                       value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--A/L Bio Subject Input Form END-->
+
+                                    <!--A/L Art Subject Input Form START-->
+                                    <div ng-show="grade.studentGrades.sLevel=='G.C.E (A/L) Arts'">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Language & Lit. :</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].languagelit"
+                                                       value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Rel. & Histroy :</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].relhistroy"
+                                                       value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Economics :</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].economics" value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Gen. Knowledge:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].genralenglish"
+                                                       value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Genaral English:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].genralenglish"
+                                                       value=""
+                                                       type="number">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--A/L Art Subject Input Form END-->
+
+                                    <!--O/L Subject Input Form START-->
+                                    <div ng-show="grade.studentGrades.sLevel=='G.C.E (O/L)'">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Science:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].science" value=""
+                                                       type="number" name="ol">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Maths:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].maths" value=""
+                                                       type="number" name="ol">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">History:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].histroy" value=""
+                                                       type="number" name="ol">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Religon:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].religon" value=""
+                                                       type="number" name="ol">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Lang. & Lit (1st):</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].mainlanguage"
+                                                       value=""
+                                                       type="number" name="ol">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">English:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].english" value=""
+                                                       type="number" name="ol">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Elective 01:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].elective1" value=""
+                                                       type="number" name="ol">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Elective 02:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].elective2" value=""
+                                                       type="number" name="ol">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Elective 03:</label>
+                                            <div class="col-lg-6">
+                                                <input class="form-control"
+                                                       ng-model="grade.studentGrades.sGrades[0].elective3" value=""
+                                                       type="number" name="ol">
+                                            </div>
+                                        </div>
+                                        <!--O/L Subject Input Form END-->
+
+                                        <!--Subject Input Form END-->
+                                    </div>
+                                    <div>
+
+                                        <!-- Average calculation START-->
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label"></label>
+                                            <div class="col-lg-11" align="right">
+                                                <md-button class="md-raised md-primary"
+                                                           ng-click="grade.calAvgUpdate()">
+                                                    <i class="fa fa-refresh"></i>&nbsp;
+                                                    <span style="margin-right: 5px;">Calculate Average</span>
+                                                </md-button>
+                                                <h3 style="display: inline-block">Average : </h3>
+                                                <label style="font-size: 24px">{{
+                                                    grade.studentGrades.avg}}</label>
+                                                <label class="col-lg-3 control-label"></label>
+                                            </div>
+                                        </div>
+                                        <!-- Average calculation END-->
+
+                                        <div class="form-group">
+                                            <div>
+                                                <label>Tag subjects needs remarks</label>
+                                                <md-chips readonly="grade.readonly" md-removable="grade.removable"
+                                                          ng-model="grade.studentGrades.sRemarksTags">
+                                                    <md-chip-template>
+                                                        <strong>{{$chip}}</strong>
+                                                    </md-chip-template>
+                                                </md-chips>
+                                            </div>
+                                            <div class="col-md-12" style="padding-top: 30px;">
+                                                <textarea class="form-control" placeholder="Add your remarks here">{{grade.studentGrades.sRemarks}}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label"></label>
+                                            <div class="col-md-8">
+                                                <md-button class="md-raised md-primary" ng-click="grade.updateGrade()">
+                                                    <i class="fa fa-save"></i>&nbsp;
+                                                    <span style="margin-right: 5px;">Save & Update</span>
+                                                </md-button>
+
+                                                <md-button class="md-raised md-warn" ng-click="grade.Clear()">
+                                                    <i class="fa fa-eraser"></i>&nbsp;
+                                                    <span style="margin-right: 5px;">Clear</span>
+                                                </md-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </md-content>
+            </md-tab>
+            <!-- Update Grades tab END-->
+
+            <!-- View Class Grades tab START-->
+            <md-tab md-on-select="grade.Clear()" label="View Class Grades" ng-if="grade.teacherView">
+                <div style="padding-top: 30px; padding-left: 10px">
+                    <md-content class="md-padding">
+                        <div class="col-md-12 col-sm-12 col-xs-12 well well-sm">
+                            <div></div>
+                            <h4>Select a class</h4>
+                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                    <label>Student's Class</label>
+                                    <md-select name="type" ng-model="grade.studentGrades.sClass" required>
+                                        <md-option value="10A">10A</md-option>
+                                        <md-option value="10B">10B</md-option>
+                                        <md-option value="10C">10C</md-option>
+                                        <md-option value="11A">11A</md-option>
+                                        <md-option value="11B">11B</md-option>
+                                        <md-option value="11C">11C</md-option>
+                                        <md-option value="12A">12 Arts</md-option>
+                                        <md-option value="12B">12 Bio</md-option>
+                                        <md-option value="12C">12 Commerce</md-option>
+                                        <md-option value="12M">12 Maths</md-option>
+                                        <md-option value="13A">13 Arts</md-option>
+                                        <md-option value="13B">13 Bio</md-option>
+                                        <md-option value="13C">13 Commerce</md-option>
+                                        <md-option value="13M">13 Maths</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <div class="col-md-6 col-md-offset-6 text-right"
+                                     style="padding-right: 0; margin-bottom: 30px; margin-top: 30px;">
+                                    <md-button class="md-raised md-primary" style="margin: 0;"
+                                               ng-click="grade.getGradeDetailsByClass()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                        <span style="margin-right: 5px;">Get Details</span>
+                                    </md-button>
+                                </div>
+                            </div>
+                        </div>
+                    </md-content>
+
+                    <md-content>
+                        <div class="col-md-6 col-md-offset-3">
+                            <md-card flex ng-repeat="item in grade.sGrades">
+                                <md-card-header>
+                                    <md-card-avatar>
+                                        <img class="md-user-avatar"
+                                             src="https://www.mindzcloud.com/wp-content/themes/mindzcloud/images/client-1.png"/>
+                                    </md-card-avatar>
+                                    <md-card-header-text>
+                                        <label style="font-size: 14px">{{item.sName}}</label>
+                                        <span>Term 0{{item.cTerm}} | {{item.sLevel}}</span>
+                                    </md-card-header-text>
+                                </md-card-header>
+                                <div class="col-md-12">
+                                    <div class="md-list-item-text" layout="column">
+                                        <style>
+                                            table, th, td {
+                                                border: 1px solid grey;
+                                                border-collapse: collapse;
+                                                padding: 5px;
+                                            }
+
+                                            table tr:nth-child(odd) {
+                                                background-color: #f2f2f2;
+                                            }
+
+                                            table tr:nth-child(even) {
+                                                background-color: #ffffff;
+                                            }
+                                        </style>
+
+                                        <div class="md-dialog-content">
+                                            <form name="groupForm" id="groupForm">
+
+                                                <!--Student grade information start-->
+                                                <div class="col-md-8 col-md-offset-1">
+                                                    <td>
+                                                        <table border="0">
+                                                            <tr>
+                                                                <th>Subject Name</th>
+                                                                <th>Marks</th>
+                                                            </tr>
+
+                                                            <tr ng-repeat="(key,value) in item.sGrades[0]">
+                                                                <td width="275">{{key}}</td>
+                                                                <td width="100">{{value}}</td>
+                                                            </tr>
+
+                                                        </table>
+                                                    </td>
+                                                </div>
+                                                <!--Student grade information end-->
+
+                                                <!--Student average information start-->
+                                                <div class="form-group">
+                                                    <div class="col-lg-12" align="right">
+                                                        <h4 style="display: inline-block">Average : </h4>
+                                                        <label style="font-size: 20px">{{item.sAverage}}</label>
+                                                        <div style="padding-top: 10px; padding-bottom: 10px;">
+                                                            <md-divider inset></md-divider>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Student average information end-->
+
+                                                <!--Student remarks tags start-->
+                                                <div class="form-group col-md-12">
+                                                    <h5><b>Subjects that needed to be improved</b></h5>
+                                                    <md-chips ng-model="item.sRemarksTags" readonly="true">
+                                                        <md-chip-template>
+                                                            <strong>{{$chip}}</strong>
+                                                        </md-chip-template>
+                                                    </md-chips>
+                                                </div>
+                                                <!--Student remarks tags end-->
+
+                                                <!--Student remarks notes start-->
+                                                <div style="padding-top: 15px; padding-bottom: 30px;">
+                                                    <md-input-container class="form-group col-md-12">
+                                                        <h5><b>Remark Notes</b></h5>
+                                                        <b><textarea disabled>{{item.sRemarks}}</textarea></b>
+                                                    </md-input-container>
+                                                </div>
+                                                <!--Student remarks notes end-->
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </md-card>
+                        </div>
+                    </md-content>
+                </div>
+            </md-tab>
+            <!-- View Class Grades tab END-->
+
+            <!-- View Student Grades tab START-->
+            <md-tab md-on-select="grade.Clear()" label="View Student Grades" ng-if="grade.studentView">
+                <div style="padding-top: 30px; padding-left: 10px">
+                    <md-content class="md-padding">
+                        <div class="col-md-12 col-sm-12 col-xs-12 well well-sm">
+                            <div></div>
+                            <h4>Enter Student ID</h4>
+                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                    <label>Student ID Number</label>
+                                    <input name="sid" ng-model="grade.studentGrades.sID">
+                                </md-input-container>
+                                <div class="col-md-6 col-md-offset-6 text-right"
+                                     style="padding-right: 0; margin-bottom: 30px; margin-top: 30px;">
+                                    <md-button class="md-raised md-primary" style="margin: 0;"
+                                               ng-click="grade.getGradesById()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                        <span style="margin-right: 5px;">Get Details</span>
+                                    </md-button>
+                                </div>
+                            </div>
+                        </div>
+                    </md-content>
+                    {{ item.sID }}
+                    <md-content>
+                        <md-list flex>
+                            <md-subheader class="md-no-sticky"></md-subheader>
+                            <div class="col-md-12">
+                                <md-list-item class="md-3-line" ng-repeat="item in grade.sGrades"
+                                              ng-click="grade.showMarkDialog($event, $index)">
+                                    <img ng-src="https://www.mindzcloud.com/wp-content/themes/mindzcloud/images/client-1.png"
+                                         class="md-avatar" alt="{{item.sID}}"/>
+                                    <div class="md-list-item-text" layout="column">
+                                        <h3><b>Grade {{ item.sClass}} Term {{ item.cTerm}}</b></h3>
+                                    </div>
+                                    <div style="margin-right: 25px;">
+                                        <h4>Average : {{ item.sAverage }}</h4>
+                                    </div>
+                                </md-list-item>
+                            </div>
+                        </md-list>
+                    </md-content>
+                </div>
+            </md-tab>
+            <!-- View Student Grades tab END-->
+
+        </md-tabs>
+    </md-content>
+</div>

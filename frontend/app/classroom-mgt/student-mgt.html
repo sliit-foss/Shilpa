@@ -1,0 +1,104 @@
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+
+            Add Students
+            <!--Add Student tab-->
+            <md-tab label="Add Students">
+                <md-content class="md-padding">
+                    <form name="studentForm" id="studentForm">
+                        <div style="padding-top: 30px; padding-left: 30px">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-md-5 col-sm-6 col-xs-12 well well-sm">
+                                    <div>
+
+                                    </div>
+                                    <h4>Add Students</h4>
+                                    <div class="col-md-12" style="margin-bottom: 10px;">
+
+                                        <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                            <label>Class</label>
+                                            <input name="class" ng-model="student.studentM.class" required/>
+                                            <md-icon  class=" fa fa-plus md-primary" ng-click="student.searchStudents(student.studentM.class)"></md-icon>
+
+                                            <div ng-messages="studentForm.class.$error">
+                                                <div ng-message="required">Class is Required</div>
+                                            </div>
+
+                                        </md-input-container>
+
+                                        <md-autocomplete flex="" required="" md-input-name="autocompleteField"
+                                                         md-input-minlength="2"
+                                                         md-input-maxlength="12"
+                                                         md-no-cache="student.noCache"
+                                                         md-selected-item="student.selectedItem"
+                                                         md-search-text="student.searchText"
+                                                         md-items="item in student.querySearch(student.searchText)"
+                                                         md-item-text="item.studentId"
+                                                         md-require-match=""
+                                                         md-floating-label="Student Admission No">
+
+                                            <md-item-template>
+                                                <span md-highlight-text="student.searchText">{{item.studentId}}</span>
+                                            </md-item-template>
+
+                                            <div ng-messages="studentForm.autocompleteField.$error" ng-if="studentForm.autocompleteField.$touched">
+                                                <div ng-message="required">You <b>must</b> have a Student Admission No</div>
+                                                <div ng-message="md-require-match">Please select an existing Admission for the particular class.</div>
+                                                <div ng-message="minlength">Your entry is not long enough.</div>
+                                                <div ng-message="maxlength">Your entry is too long.</div>
+                                            </div>
+
+                                            <!--<md-icon class=" fa fa-plus md-primary" style="position: relative"  ng-click="student.getStudentbyAdmission(student.selectedItem.studentId)"></md-icon>-->
+
+                                        </md-autocomplete>
+
+                                        <div class="col-md-6 col-md-offset-6 text-right" style="padding-right: 0; margin-bottom: 30px;">
+                                            <md-button class="md-raised md-primary" ng-click="student.getStudentbyAdmission(student.selectedItem.studentId)">Add Student</md-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+
+            <!--Student View tab-->
+            <md-tab label="View Student">
+
+                <md-table-container>
+                    <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                        <label>Search</label>
+                        <input type="text" placeholder="Search Student" ng-model="searchStudent">
+                    </md-input-container>
+
+                    <table md-table ng-model="student.selected" name="studentTable" id="studentTable">
+                        <thead md-head md-order="student.query.order" md-on-reorder="" >
+                        <tr md-row>
+                            <th md-column><span>Student Name</span></th>
+                            <th md-column>Admission Number</th>
+                            <th md-column>Class</th>
+                            <th md-column></th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row md-select="studentModel" md-select-id="sname" md-auto-select ng-repeat="studentList in student.students | filter: searchStudent | orderBy: student.query.order | limitTo: student.query.limit : (student.query.page -1) * student.query.limit">
+                            <td md-cell>{{studentList.sname}}</td>
+                            <td md-cell>{{studentList.admissionNo}}</td>
+                            <td md-cell>{{studentList.class}}</td>
+                            <td md-cell> <md-button class="md-icon-button" ng-click="student.showDeleteConfirmation(studentList.admissionNo)">
+                                <md-icon md-font-library="material-icons" alt="Delete student">delete</md-icon>
+                            </md-button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+                <md-table-pagination md-limit="student.query.limit" md-limit-options="student.limitOptions" md-page="student.query.page" md-total="{{student.students.length}}" md-page-select="true"></md-table-pagination>
+            </md-tab>
+
+        </md-tabs>
+    </md-content>
+</div>

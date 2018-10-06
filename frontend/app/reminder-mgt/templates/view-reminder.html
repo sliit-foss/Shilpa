@@ -1,0 +1,56 @@
+<div ng-cloak>
+    <mg-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="reminders">
+                <md-content class="md-padding">
+                        <md-content style="height: 600px;" md-theme="altTheme">
+                            <div layout="row" layout-wrap>
+                                <div flex="90"></div>
+                                <div flex="10"><md-switch ng-model="reminder.showAll" aria-label="Show All" ng-change="reminder.fillTable()">
+                                        Show All
+                                </md-switch></div>
+                            </div>
+                            <section>
+                                <md-list layout-padding="">
+                                    <div ng-show="reminder.reminderStatus">
+                                        <h2>No Reminders</h2>
+                                    </div>
+                                    <md-list-item class="md-3-line" ng-repeat="item in reminder.reminders track by $index" ng-click="reminder.showOnEditMode(item,$event)">
+                                        <div class="md-list-item-text">
+                                            <h3><b>{{item.title}}</b></h3>
+                                            <p>{{item.description}}</p>
+                                        </div>
+                                    </md-list-item>
+                                </md-list>
+                            </section>
+                        </md-content>
+                </md-content>
+            </md-tab>
+            <md-tab label="Add">
+                <mg-content class="md-padding">
+                    <div layout="column">
+                        <md-content layout-padding="layout-md">
+                            <form name="addReminderForm" id="addReminderForm" novalidate>
+                                <div layout-gt-xs="row">
+                                    <md-input-container class="md-block" flex-gt-xs="">
+                                        <label>Title</label>
+                                        <input ng-model="reminder.formData.title" required="">
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label>Remind date</label>
+                                        <md-datepicker ng-model="reminder.formData.remindDate" required="" md-min-date="reminder.minDate"></md-datepicker>
+                                    </md-input-container>
+                                </div>
+                                <md-input-container class="md-block" >
+                                    <label>Remind me to..</label>
+                                    <textarea ng-model="reminder.formData.description" md-maxlength="200" rows="2" md-select-on-focus required=""></textarea>
+                                </md-input-container>
+                                <md-button class="md-raised md-primary" ng-click="reminder.addNewReminder(reminder.formData)">Add</md-button>
+                            </form>
+                        </md-content>
+                    </div>
+                </mg-content>
+            </md-tab>
+        </md-tabs>
+    </mg-content>
+</div>

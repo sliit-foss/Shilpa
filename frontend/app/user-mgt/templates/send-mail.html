@@ -1,0 +1,44 @@
+<md-dialog class="add-group-dialog" id="sendMail" name="sendMail">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Compose Mail</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="send.cancel()">
+                <md-icon md-font-library="material-icons" aria-label="Close dialog">cancel</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <form name="sendMailForm" id="sendMailForm">
+                <div layout="column">
+
+                    <!--To Address-->
+                    <md-input-container>
+                        <label>To</label>
+                        <input type="text" name="toAddress" ng-model="send.mail.toAddress" required>
+                        <div ng-messages="sendMailForm.toAddress.$error">
+                            <div ng-message="required">Group name is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <!--Subject-->
+                    <md-input-container>
+                        <label>Subject</label>
+                        <input type="text" name="mailSubject" ng-model="send.mail.subject">
+                    </md-input-container>
+
+                    <!--Body-->
+                    <md-input-container>
+                        <label>Body</label>
+                        <input type="text" name="mailBody" ng-model="send.mail.message">
+                    </md-input-container>
+
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-raised md-primary" ng-click="send.sendMail()">Send</md-button>
+    </md-dialog-actions>
+</md-dialog>

@@ -1,0 +1,41 @@
+<div class="col-md-12">
+    <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+            <img src="../../../assets/images/database.png" style="width: 20px; margin-right: 15px;">
+            <h2>Storage Manager</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="openNewStorageRecord($event)">
+                <i class="fa fa-plus"></i>
+                <md-tooltip md-direction="bottom">New Storage Record</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="getStorageRecords()">
+                <i class="fa fa-refresh"></i>
+                <md-tooltip md-direction="bottom">Refresh</md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div class="lm-container">
+        <md-content md-theme="docs-dark" ng-hide="isLoading">
+            <md-list flex>
+                <md-list-item ng-repeat="item in availableRecords">
+                    <div class="col-md-1">
+                        <i class="fa fa-database" aria-hidden="true"></i>
+                    </div>
+                    <div class="md-list-item-text" layout="column">
+                        <h5><b>{{item.username}}</b></h5>
+                    </div>
+                    <span flex></span>
+                    <div class="md-list-item-text" layout="column">
+                        <h5><b>{{(item.size/1024)/1024}} MB</b></h5>
+                    </div>
+                    <span flex></span>
+                    <md-button class="md-icon-button" ng-click="updateStorageRecord(item)">
+                        <i class="fa fa-edit"></i>
+                    </md-button>
+                </md-list-item>
+            </md-list>
+        </md-content>
+        <clms-content-loading ng-show="isLoading"></clms-content-loading>
+        <clms-content-empty ng-show="availableAssignments.length == 0"></clms-content-empty>
+    </div>
+</div>

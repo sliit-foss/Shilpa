@@ -1,0 +1,42 @@
+<md-dialog class="edit-reminder-dialog" id="editGroup" name="editGroup">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Update Reminder</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="group.cancel()">
+                <md-icon md-font-library="material-icons" aria-label="Close dialog">cancel</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <form name="editReminderForm" id="editReminderForm">
+                <div layout="column">
+
+                    <md-input-container>
+                        <label>Title</label>
+                        <input type="text" name="title" required ng-model="editformData.title">
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Remind Date</label>
+                        <md-datepicker ng-model="editformData.remindDate" required md-min-date="minDate"></md-datepicker>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Remind me to..</label>
+                        <input type="text" name="description" required ng-model="editformData.description">
+                    </md-input-container>
+
+                    <md-dialog-actions>
+                        <md-button class="md-raised md-primary" ng-click="editReminder(editformData)">Update</md-button>
+                        <md-button class="md-raised md-primary" ng-click="deleteReminder()">Delete</md-button>
+                    </md-dialog-actions>
+
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+</md-dialog>
+

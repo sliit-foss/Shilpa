@@ -1,0 +1,86 @@
+.lm-uploadform-container{
+    padding: 20px;
+    /*background-color: #C5EFF7;*/
+    background-color: rgba(187, 191, 190, 0.63);
+}
+
+.lm-container{
+    height: 250px;
+    overflow-y: scroll;
+    box-shadow: 1px 1px 20px #c3c3c3;
+}
+
+md-card{
+    box-shadow: 1px 1px 20px #c3c3c3;
+}
+
+.lm-uploadform-container .lm-upload-btn{
+    padding: 0 15px;
+}
+
+/*file manager*/
+.file-manager-container{
+    padding: 0;
+}
+
+.file-manager-container a{
+    cursor: hand;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.file-manager-container .col-md-2{
+    padding: 0;
+}
+
+.file-manager-container .col-md-10{
+    padding: 0;
+}
+
+.file-manager-container .col-md-12{
+    padding: 0 !important;
+}
+
+.file-manager-container .tree-view{
+    height: inherit;
+    overflow-y: scroll;
+    background-color: #FDE3A7;
+    padding: 15px;
+}
+
+.file-manager-container .files-container{
+    margin-top: 15px;
+    height: 450px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.file-manager-container .file-manager-footer{
+    height: 50px;
+    width: 100%;
+    background-color: #66afe9;
+    position: absolute;
+    top: 300px;
+    padding: 15px;
+}
+
+.file-manager-container .files-container .file{
+    padding: 15px;
+}
+
+.file-manager-container .files-container .file i{
+    color: #00b3ee;
+}
+
+.file-manager-container .files-container .file i:hover{
+    color: #00c3ff;
+}
+
+.file-manager-container .files-container .file-selected{
+    background-color: rgba(0, 192, 255, 0.51);
+}
+
+/*Assignment Manager*/
+.assignment-details-container{
+    padding: 15px;
+}

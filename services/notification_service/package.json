@@ -1,0 +1,24 @@
+{
+  "name": "notification_service",
+  "version": "1.0.0",
+  "description": "This service is used for manage notifications",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha *.test.js",
+    "start": "node server.js"
+  },
+  "author": "Isuru Prasad",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "mongoose": "^4.12.3"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "chai-http": "^1.0.0",
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.1"
+  }
+}

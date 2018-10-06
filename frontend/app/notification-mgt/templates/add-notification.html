@@ -1,0 +1,25 @@
+<div layout="column" ng-show="notification.isTeacher">
+    <md-content layout-padding="layout-md">
+        <form name="notification.notificationForm">
+            <div layout-gt-xs="row">
+                <md-input-container class="md-block" flex-gt-xs="">
+                    <label>Title</label>
+                    <input ng-model="notification.formData.title" required="">
+                </md-input-container>
+                <md-input-container>
+                    <label>class</label>
+                    <md-select ng-model="notification.formData.class" required="">
+                        <md-option ng-repeat="class in notification.classes" ng-value="class.className" >
+                            {{class.className}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <md-input-container class="md-block" >
+                <label>Description</label>
+                <textarea ng-model="notification.formData.description" md-maxlength="200" rows="2" md-select-on-focus required=""></textarea>
+            </md-input-container>
+            <md-button class="md-raised md-primary" ng-click="notification.save(notification.formData)">Add</md-button>
+        </form>
+    </md-content>
+</div>

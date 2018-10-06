@@ -1,0 +1,76 @@
+<md-dialog class="add-group-dialog" id="addGroup" name="addGroup">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Create User Group</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="group.cancel()">
+                <md-icon md-font-library="material-icons" aria-label="Close dialog">cancel</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <form name="groupForm" id="groupForm">
+                <div layout="column">
+
+                    <!--Group name-->
+                    <md-input-container>
+                        <label>Group Name</label>
+                        <input type="text" name="groupName" required ng-model="group.initiatedGroup.groupName">
+                        <div ng-messages="groupForm.groupName.$error">
+                            <div ng-message="required">Group name is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <!--Description-->
+                    <md-input-container>
+                        <label>Description</label>
+                        <input type="text" name="groupDescription" required ng-model="group.initiatedGroup.description">
+                        <div ng-messages="groupForm.groupDescription.$error">
+                            <div ng-message="required">Group name is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <!--Allowed Sections-->
+                    <md-chips ng-model="group.selectedGroups" md-autocomplete-snap
+                              md-transform-chip="group.transformChip($chip)"
+                              md-require-match="group.autocompleteDemoRequireMatch">
+                        <md-autocomplete
+                                md-selected-item="group.selectedItem"
+                                md-search-text="group.searchText"
+                                md-items="item in group.querySearch(group.searchText)"
+                                md-item-text="item.name"
+                                placeholder="Search allowed sections">
+                            <span md-highlight-text="group.searchText">{{item.name}}</span>
+                        </md-autocomplete>
+                        <md-chip-template>
+                        <span>
+                          <strong>{{$chip.name}}</strong>
+                        </span>
+                        </md-chip-template>
+                    </md-chips>
+                    <md-divider></md-divider>
+
+                    <div layout="row" layout-wrap="">
+                        <div flex>
+                            <!--<md-subheader class="selected-user-area-header">Selected Users</md-subheader>-->
+                            <md-list flex ng-cloak>
+                                <md-list-item class="md-2-line" ng-repeat="user in group.initiatedGroup.members">
+                                    <img ng-src="../assets/images/boss.png" class="md-avatar" style="background-color:#b39ddb"/>
+                                    <div class="md-list-item-text" layout="column">
+                                        <h3> {{ user.name }} </h3>
+                                        <h4>{{ user.username }}</h4>
+                                    </div>
+                                    <md-checkbox class="md-secondary" ng-model="user.wanted"></md-checkbox>
+                                </md-list-item>
+                            </md-list>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-raised md-primary" ng-click="group.createUserGroup()">Create</md-button>
+    </md-dialog-actions>
+</md-dialog>

@@ -1,0 +1,165 @@
+<script src="../../gulpfile.js"></script>
+
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <!--Add Class attendance Start-->
+            <md-tab md-on-select="attendance.Clear()" label="Add Class Attendance">
+                <div style="padding-top: 30px; padding-left: 10px">
+                    <md-content class="md-padding">
+                        <div class="col-md-12 col-sm-12 col-xs-12 well well-sm">
+                            <div></div>
+                            <h4>Select a class</h4>
+                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                    <label>Student's Class</label>
+                                    <md-select name="type" ng-model="attendance.sAttendance.sClass" required>
+                                        <md-option value="10A">10A</md-option>
+                                        <md-option value="10B">10B</md-option>
+                                        <md-option value="10C">10C</md-option>
+                                        <md-option value="11A">11A</md-option>
+                                        <md-option value="11B">11B</md-option>
+                                        <md-option value="11C">11C</md-option>
+                                        <md-option value="12A">12 Arts</md-option>
+                                        <md-option value="12B">12 Bio</md-option>
+                                        <md-option value="12C">12 Commerce</md-option>
+                                        <md-option value="12M">12 Maths</md-option>
+                                        <md-option value="13A">13 Arts</md-option>
+                                        <md-option value="13B">13 Bio</md-option>
+                                        <md-option value="13C">13 Commerce</md-option>
+                                        <md-option value="13M">13 Maths</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <div class="col-md-6 col-md-offset-6 text-right"
+                                     style="padding-right: 0; margin-bottom: 30px; margin-top: 30px;">
+                                    <md-button class="md-raised md-primary" style="margin: 0;"
+                                               ng-click="attendance.getStudentListByClass()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                        <span style="margin-right: 5px;">Get Student list</span>
+                                    </md-button>
+                                </div>
+                            </div>
+                        </div>
+                    </md-content>
+
+
+                    <md-content>
+                        <div flex-gt-xs class="col-md-12">
+                            <div class="col-md-2">
+                                <h4>Select the date : </h4></div>
+                            <div style="margin-left: 25px;">
+                                <md-datepicker ng-model="attendance.sAttendance.aDate"
+                                               md-placeholder="Enter date"></md-datepicker>
+                            </div>
+                        </div>
+                    </md-content>
+                    <md-content>
+                        <md-list flex>
+                            <md-subheader class="md-no-sticky"></md-subheader>
+                            <div class="col-md-12">
+                                <md-list-item class="md-3-line" ng-repeat="item in attendance.sAttendance">
+                                    <img ng-src="https://www.mindzcloud.com/wp-content/themes/mindzcloud/images/client-1.png"
+                                         class="md-avatar"/>
+                                    <div class="md-list-item-text" layout="column">
+                                        <h3><b>{{item.name}} | {{item.studentId}}</b></h3>
+                                    </div>
+                                    <div style="margin-right: 25px;">
+                                        <md-checkbox class="md-secondary" ng-model="person.selected"></md-checkbox>
+                                    </div>
+                                </md-list-item>
+                            </div>
+                        </md-list>
+
+                        <div class="form-group" align="right"
+                             ng-show="(attendance.sAttendance[0].permission=='student')">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-12">
+                                <md-button class="md-raised md-primary"
+                                           ng-click="attendance.saveAttendance()">
+                                    <i class="fa fa-save"></i>&nbsp;
+                                    <span style="margin-right: 5px;">Save</span>
+                                </md-button>
+
+                                <md-button class="md-raised md-warn" ng-click="attendance.Clear()">
+                                    <i class="fa fa-eraser"></i>&nbsp;
+                                    <span style="margin-right: 5px;">Clear</span>
+                                </md-button>
+                            </div>
+                        </div>
+                    </md-content>
+                </div>
+            </md-tab>
+            <!--Add Class attendance End-->
+
+            <!--View Class attendance Start-->
+            <md-tab md-on-select="attendance.Clear()" label="View Class Attendance">
+                <div style="padding-top: 30px; padding-left: 10px">
+                    <md-content class="md-padding">
+                        <div class="col-md-12 col-sm-12 col-xs-12 well well-sm">
+                            <div></div>
+                            <h4>Select a class</h4>
+                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                <md-input-container class="md-block" flex-gt-sm style="margin-bottom: 0;">
+                                    <label>Student's Class</label>
+                                    <md-select name="type" ng-model="attendance.sAttendance.sClass" required>
+                                        <md-option value="10A">10A</md-option>
+                                        <md-option value="10B">10B</md-option>
+                                        <md-option value="10C">10C</md-option>
+                                        <md-option value="11A">11A</md-option>
+                                        <md-option value="11B">11B</md-option>
+                                        <md-option value="11C">11C</md-option>
+                                        <md-option value="12A">12 Arts</md-option>
+                                        <md-option value="12B">12 Bio</md-option>
+                                        <md-option value="12C">12 Commerce</md-option>
+                                        <md-option value="12M">12 Maths</md-option>
+                                        <md-option value="13A">13 Arts</md-option>
+                                        <md-option value="13B">13 Bio</md-option>
+                                        <md-option value="13C">13 Commerce</md-option>
+                                        <md-option value="13M">13 Maths</md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                <div flex-gt-xs class="col-md-6" style="margin-top: 30px;">
+                                    <div class="col-md-6">
+                                        <h4>Please select the date : </h4></div>
+                                    <md-datepicker ng-model="attendance.dateAttendance"
+                                                   md-placeholder="Enter date"></md-datepicker>
+                                </div>
+                                <div class="col-md-6 col-md-offset-6 text-right"
+                                     style="padding-right: 0; margin-bottom: 30px; margin-top: 30px;">
+                                    <md-button class="md-raised md-primary" style="margin: 0;"
+                                               ng-click="attendance.getAttendanceDetailsByFilter()">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                        <span style="margin-right: 5px;">Get Attendance Details</span>
+                                    </md-button>
+                                </div>
+                            </div>
+                        </div>
+                    </md-content>
+
+                    <md-content>
+                        <md-list flex>
+                            <md-subheader class="md-no-sticky"></md-subheader>
+                            <div class="col-md-12">
+                                <md-list-item class="md-3-line"
+                                              ng-repeat="item in attendance.sAttendance[0].attendanceRecodes">
+                                    <img ng-src="https://www.mindzcloud.com/wp-content/themes/mindzcloud/images/client-1.png"
+                                         class="md-avatar"/>
+
+                                    <div class="md-list-item-text" layout="column">
+                                        <h3><b>{{item.sName}} | {{item.sID}}</b></h3>
+                                    </div>
+                                    <div style="margin-top: 10px;">
+                                        <h4><b>Status :{{item.aStatus}}</b></h4>
+                                    </div>
+                                </md-list-item>
+                            </div>
+                        </md-list>
+                    </md-content>
+                </div>
+            </md-tab>
+            <!--View Class attendance End-->
+        </md-tabs>
+    </md-content>
+</div>

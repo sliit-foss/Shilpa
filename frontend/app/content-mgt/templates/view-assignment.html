@@ -1,0 +1,169 @@
+<md-dialog class="add-group-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>View Assignment</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="viewAssignment.closeDialog()">
+                <md-icon md-font-library="material-icons" aria-label="Close dialog">cancel</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <clms-content-loading ng-show="viewAssignment.isLoading" style="margin-bottom: 40px;"></clms-content-loading>
+            <div ng-hide="viewAssignment.isLoading">
+                <div class="assignment-details-container" ng-hide="viewAssignment.isEditMode">
+                    <h2>{{viewAssignment.assignment.name}}</h2>
+                    <timer end-time="viewAssignment.assignment.submissionDate"><small>Remaining</small> {{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
+                    <span flex></span>
+                    <md-button class="md-raised" ng-show="viewAssignment.permission == 'teacher'" ng-click="viewAssignment.goToEditMode()">Edit</md-button>
+                    <md-divider></md-divider>
+                    <h5>{{viewAssignment.assignment.description}}</h5>
+
+                    <md-button class="md-raised md-primary" ng-click="viewAssignment.showUploadForm()"
+                               ng-hide="viewAssignment.permission == 'teacher'"
+                               ng-disabled="viewAssignment.availableSubmissions.length != 0">Add Submission</md-button>
+
+
+                    <!--uploader form-->
+                    <div class="lm-uploadform-container"  style="margin-top: 15px;" ng-show="viewAssignment.isEnabledUploadForm">
+                        <div class="text-center">
+                            <!--<input id="fileInput" onchange="angular.element(this).scope().addFileToList(this);"-->
+                            <!--type="file" class="ng-hide" multiple>-->
+                            <div ng-if="viewAssignment.uploader">
+                                <input id="ps-submissionInput" type="file" nv-file-select uploader="viewAssignment.uploader"
+                                       multiple  class="md-raised md-warn" style="display: none;"/>
+                            </div>
+                            <md-button id="ps-submissionUploadBtn" type="file" class="md-raised md-warn lm-upload-btn">
+                                <i class="fa fa-plus"></i>
+                                &nbsp;Add Files
+                            </md-button>
+                            <md-button type="file" class="md-raised md-primary lm-upload-btn"
+                                       ng-click="viewAssignment.uploader.uploadAll()"
+                                       ng-disabled="viewAssignment.uploader.queue.length == 0">
+                                <i class="fa fa-upload"></i>
+                                &nbsp;Upload Files
+                            </md-button>
+                        </div>
+                        <md-list flex id="uploadList">
+                            <md-list-item ng-repeat="item in viewAssignment.uploader.queue">
+                                <div class="col-md-1">
+                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="md-list-item-text" layout="column" style="text-wrap: normal;">
+                                        <h6>{{item.file.name}}</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="md-list-item-text" layout="column">
+                                        <h6>{{ item.file.size/1024/1024|number:2 }} MB</h6>
+                                    </div>
+                                </div>
+                                <span flex></span>
+                                <div class="col-md-2">
+                                    <md-progress-linear md-mode="determinate" value="{{item.progress}}"></md-progress-linear>
+                                </div>
+                                <md-button class="md-icon-button" ng-click="item.upload()">
+                                    <i class="fa fa-upload"></i>
+                                </md-button>
+                                <md-button class="md-icon-button" ng-click="item.remove()">
+                                    <i class="fa fa-remove"></i>
+                                </md-button>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+
+                    <!--User Submissions-->
+                    <md-content md-theme="docs-dark" ng-hide="viewAssignment.isLoading || viewAssignment.permission == 'teacher' || viewAssignment.permission == 'admin'">
+                        <md-list flex>
+                            <md-list-item ng-repeat="item in viewAssignment.submission.files">
+                                <div class="col-md-1">
+                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                </div>
+                                <div class="md-list-item-text" layout="column">
+                                    <h5><b>{{item.split(viewAssignment.assignmentId+"/"+viewAssignment.loggedInUser+"/")[1]}}</b></h5>
+                                </div>
+                                <span flex></span>
+                                <a ng-href="https://cyborgs-lms.s3.amazonaws.com/{{item}}" target="_blank">
+                                    <md-button class="md-icon-button">
+                                        <i class="fa fa-download"></i>
+                                    </md-button>
+                                </a>
+                                <md-button class="md-icon-button" ng-click="viewAssignment.removeFile($event,item)">
+                                    <i class="fa fa-remove"></i>
+                                </md-button>
+                            </md-list-item>
+                        </md-list>
+                    </md-content>
+
+                    <!--All Submissions-->
+                    <md-content
+                            style="margin-top: 15px;"
+                            md-theme="docs-dark"
+                            ng-hide="viewAssignment.isLoading || viewAssignment.permission != 'teacher'">
+                        <md-toolbar layout="row" class="md-hue-3">
+                            <div class="md-toolbar-tools">
+                                <span>Submissions</span>
+                            </div>
+                        </md-toolbar>
+                        <md-list flex>
+                            <md-list-item ng-repeat="item in viewAssignment.allAvailableSubmissions">
+                                <div class="col-md-1">
+                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                </div>
+                                <div class="md-list-item-text" layout="column">
+                                    <h5><b>{{item.username}}</b></h5>
+                                </div>
+                                <span flex></span>
+                                <div class="md-list-item-text" layout="column">
+                                    <h5>{{item.dateOfSubmission | before: viewAssignment.assignment.submissionDate }}</h5>
+                                </div>
+                                <span flex></span>
+                                <md-button class="md-icon-button">
+                                    <i class="fa fa-eye"></i>
+                                </md-button>
+                            </md-list-item>
+                        </md-list>
+                    </md-content>
+                    <clms-content-loading ng-show="isLoading"></clms-content-loading>
+
+                </div>
+                <form name="assignmentForm" id="assignForm" ng-show="viewAssignment.isEditMode">
+                    <div layout="column">
+                        <!--Assignment Name-->
+                        <md-input-container>
+                            <label>Assignment Name</label>
+                            <input type="text" name="name" ng-model="viewAssignment.assignment.name" required>
+                            <div ng-messages="assignmentForm.name.$error">
+                                <div ng-message="required">Assignment name is required.</div>
+                            </div>
+                            <!--<div ng-messages="groupForm.groupName.$error">-->
+                            <!--<div ng-message="required">Assignment name is required.</div>-->
+                            <!--</div>-->
+                        </md-input-container>
+
+                        <!--Description-->
+                        <md-input-container>
+                            <label>Description</label>
+                            <input type="text" name="description" ng-model="viewAssignment.assignment.description"
+                                   md-maxlength="5000" rows="5" md-select-on-focus required>
+                        </md-input-container>
+
+                        <!--Date and Time-->
+                        <md-input-container>
+                            <label>Enter date</label>
+                            <md-datepicker name="date" ng-model="viewAssignment.assignment.submissionDate"></md-datepicker>
+                        </md-input-container>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions ng-show="viewAssignment.isEditMode">
+        <md-button class="md-raised" ng-click="viewAssignment.cancel()">Cancel</md-button>
+        <md-button class="md-raised md-primary" ng-click="viewAssignment.updateAssignment()">Update</md-button>
+    </md-dialog-actions>
+</md-dialog>

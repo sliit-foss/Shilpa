@@ -1,0 +1,112 @@
+<div ng-cloak ng-show="analytics.isStudent">
+    <mg-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+
+            <md-tab label="View Marks/Grades Graphically">
+
+                <md-content>
+                    <form name="marksGraphForm" id="marksGraphForm" novalidate>
+
+                        <div layout="column">
+                            <md-input-container>
+                                <label>Class</label>
+                                <md-select ng-model="marksGraphForm.class" required>
+                                    <md-option ng-repeat="class in analytics.classes " ng-value="class" ng-click="analytics.setTerms(class)">
+                                        {{class}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+
+                        <div layout="column">
+                            <md-input-container>
+                                <label>Term</label>
+                                <md-select ng-model="marksGraphForm.term" required>
+                                    <md-option ng-repeat="term in analytics.terms track by $index" ng-value="term" ng-click="analytics.setSubjects(term)">
+                                        {{term}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+
+                        <div layout="column">
+                            <md-input-container>
+                                <label>Type</label>
+                                <md-select ng-model="marksGraphForm.graphType" required>
+                                    <md-option ng-repeat="type in analytics.GraphTypes" ng-value="type.typeName" ng-click="analytics.setTypeOfGraph(type.typeName)">
+                                        {{type.typeName}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+
+                        <div layout="column" ng-show="analytics.showSubjects">
+                            <md-input-container>
+                                <label>Subject</label>
+                                <md-select ng-model="marksGraphForm.subject" required>
+                                    <md-option ng-repeat="subject in analytics.subjects track by $index" ng-value="subject" ng-click="analytics.setAllMarks(subject)">
+                                        {{subject}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+
+                        <md-card-actions layout="row" layout-align="end center">
+                            <md-button  ng-click="analytics.showOnGraph()" class="md-raised md-primary" ng-show="analytics.showGraphGenarate">Generate Graph</md-button>
+                        </md-card-actions>
+
+                    </form>
+
+                </md-content>
+            </md-tab>
+
+            <md-tab label="View Track Performance Graphically">
+                <md-content class="md-padding">
+                    <form name="trackPerformanceGraphForm" id="trackPerformanceGraphForm" novalidate>
+
+                        <div layout="column">
+                            <md-input-container>
+                                <label>Your Avarage Grade   - {{analytics.currentUserAvg}}</label>
+                            </md-input-container>
+                        </div>
+
+                        <div layout="column">
+                            <md-input-container>
+                                <label>Avarage Student Grade - {{analytics.currentNormalStudentAvg}}</label>
+                            </md-input-container>
+                        </div>
+
+                        <md-card-actions layout="row" layout-align="end center">
+                            <md-button  ng-click="analytics.studentViewShowOnTrachPerformanceGraph()" class="md-raised md-primary">Generate Graph</md-button>
+                        </md-card-actions>
+
+                    </form>
+                </md-content>
+            </md-tab>
+
+            <md-tab label="View Attendance Graphically">
+                <md-content class="md-padding">
+                    <form name="viewAttendanceGraphForm" id="viewAttendanceGraphForm" novalidate>
+
+                        <div layout="column">
+                            <md-input-container>
+                                <label>Student Name : {{analytics.currentStudentName}}</label>
+                            </md-input-container>
+                        </div>
+                        <div layout="column">
+                            <md-input-container>
+                                <label>Student Class : {{analytics.currentStudentClass}}</label>
+                            </md-input-container>
+                        </div>
+
+                        <md-card-actions layout="row" layout-align="end center">
+                            <md-button  ng-click="analytics.studentViewShowOnAttendanceGraph()" class="md-raised md-primary">Generate Graph</md-button>
+                        </md-card-actions>
+
+                    </form>
+                </md-content>
+            </md-tab>
+
+        </md-tabs>
+    </mg-content>
+</div>
