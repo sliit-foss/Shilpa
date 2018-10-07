@@ -182,3 +182,13 @@ md-toolbar:not(.md-hue-1),
 .md-button.md-fab.md-fab-bottom-right:focus {
     background-color: #37474F;
 }
+
+@media only screen and (max-width: 1024px) {
+    .login-container .login-form{
+      width: 100%;
+    }
+
+    .home-container {
+      top: 0vh;
+    }
+}
