@@ -10,11 +10,11 @@
   "dependencies": {
     "body-parser": "*",
     "chai": "^4.1.2",
-    "chai-http": "^3.0.0",
+    "chai-http": "^4.2.0",
     "cors": "^2.8.4",
-    "express": "*",
+    "express": "^4.16.3",
     "mocha": "^4.0.1",
-    "mongoose": "*"
+    "mongoose": "^5.3.2"
   },
   "author": "SamithaHeanthenna",
   "license": "ISC"
