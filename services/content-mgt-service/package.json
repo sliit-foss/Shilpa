@@ -11,22 +11,22 @@
   "author": "Nandun Bandara - Team Cyborgs",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.130.0",
+    "aws-sdk": "^2.330.0",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
-    "express": "^4.15.4",
+    "express": "^4.16.3",
     "formidable": "^1.1.1",
-    "mongoose": "^4.11.12",
-    "nyc": "^11.2.1"
+    "mongoose": "^5.3.2",
+    "nyc": "^13.1.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-plugin-istanbul": "^4.1.5",
     "chai": "^4.1.2",
-    "chai-http": "^3.0.0",
+    "chai-http": "^4.2.0",
     "istanbul": "^0.4.5",
     "mocha": "^4.0.1",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.18.4"
   }
 }
