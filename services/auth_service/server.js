@@ -1,23 +1,15 @@
 
 // Dependencies
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cors = require('cors');
 
 const config = require('./_config');
-
 const routes = require('./routes');
 
 
 const app = express();
 
 app.use(express.static(__dirname));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Allow cross-origin resource sharing
-app.use(cors());
 
 // Setting a port to server to listen on
 var port = process.env.PORT || 9001;
