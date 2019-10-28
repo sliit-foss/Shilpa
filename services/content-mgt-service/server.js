@@ -4,18 +4,16 @@
 'use strict';
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const cors = require('cors');
 
 const routes = require('./routes');
+const middleware = require('./middleware');
 
 const app = express();
 
 //Middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(cors());
+middleware.init(app);
+
 
 //Application Configurations
 let port = process.env.PORT || 9004;
